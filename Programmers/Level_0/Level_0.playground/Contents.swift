@@ -1497,23 +1497,43 @@ import UIKit
 //1 ≤ n ≤ my_str의 길이
 //my_str은 알파벳 소문자, 대문자, 숫자로 이루어져 있습니다.
 
-func solution(_ my_str:String, _ n:Int) -> [String] {
-    var resultArray: [String] = []
-    var resultString: String = ""
-    
-    for i in my_str.enumerated() {
-        resultString += String(i.element)
-        if i.offset % n + 1 == n || i.offset + 1 == my_str.count {
-            resultArray.append(resultString)
-            resultString = ""
-        }
+//func solution(_ my_str:String, _ n:Int) -> [String] {
+//    var resultArray: [String] = []
+//    var resultString: String = ""
+//
+//    for i in my_str.enumerated() {
+//        resultString += String(i.element)
+//        if i.offset % n + 1 == n || i.offset + 1 == my_str.count {
+//            resultArray.append(resultString)
+//            resultString = ""
+//        }
+//    }
+//    return resultArray
+//}
+//
+//solution("abc1Addfggg4556b", 6)
+//solution("abcdef123", 3)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//i팩토리얼 (i!)은 1부터 i까지 정수의 곱을 의미합니다. 예를들어 5! = 5 * 4 * 3 * 2 * 1 = 120 입니다. 정수 n이 주어질 때 다음 조건을 만족하는 가장 큰 정수 i를 return 하도록 solution 함수를 완성해주세요.
+//
+//i! ≤ n
+//제한사항
+//0 < n ≤ 3,628,800
+
+func solution(_ n:Int) -> Int {
+    var result = n
+    var count = 1
+    while result != 0  {
+        count += 1
+        result /= count
     }
-    return resultArray
+    return count - 1
 }
 
-solution("abc1Addfggg4556b", 6)
-solution("abcdef123", 3)
+solution(3628800)
+solution(7)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
