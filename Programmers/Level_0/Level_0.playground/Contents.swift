@@ -1317,3 +1317,37 @@ import UIKit
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//최댓값 만들기 (2)
+//문제 설명
+//정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소 중 두 개를 곱해 만들 수 있는 최댓값을 return하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//-10,000 ≤ numbers의 원소 ≤ 10,000
+//2 ≤ numbers 의 길이 ≤ 100
+
+//func solution(_ numbers:[Int]) -> Int {
+//    let plusArray = numbers.filter { $0 >= 0 }.sorted(by: >)
+//    let minusArray = numbers.filter { $0 < 0 }.sorted(by: >)
+//
+//    switch (plusArray.count, minusArray.count) {
+//    case (1, 1): return numbers[0] * numbers[1]
+//    case (1, 1...): return plusArray[0] * minusArray.last!
+//    case (1..., 1): return plusArray[1] * plusArray[0]
+//    case (0, _): return minusArray[0] * minusArray[1]
+//    case (_, 0): return plusArray[0] * plusArray[1]
+//    default: return max(plusArray[0] * plusArray[1], minusArray[0] * minusArray[1])
+//    }
+//}
+//
+//func solution(_ numbers:[Int]) -> Int {
+//    var numbers = numbers.sorted()
+//
+//    return max(numbers[0] * numbers[1], numbers[numbers.count-1] * numbers[numbers.count - 2])
+//}
+//
+//solution([1, 2, -3, 4, -5])
+//solution([0, -31, 24, 10, 1, 9])
+//solution([10, 20, 30, 5, 5, 20, 5])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
