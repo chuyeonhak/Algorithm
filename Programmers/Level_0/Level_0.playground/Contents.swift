@@ -1581,16 +1581,37 @@ import UIKit
 //0 < s의 길이 < 1,000
 //s는 소문자로만 이루어져 있습니다.
 
-func solution(_ s:String) -> String {
-//    print(String(Dictionary(grouping: s) { $0 }.filter({ $0.value.count == 1 }).keys.sorted()))
-    print(String(Dictionary(grouping: s) { $0 }.values.filter { $0.count == 1 }.joined().sorted()))
+//func solution(_ s:String) -> String { String(Dictionary(grouping: s) { $0 }.values.filter { $0.count == 1 }.joined().sorted()) }
+//
+//solution("abcabcadc")
+//solution("abdc")
+//solution("hello")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//가까운 수
+//문제 설명
+//정수 배열 array와 정수 n이 매개변수로 주어질 때, array에 들어있는 정수 중 n과 가장 가까운 수를 return 하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//1 ≤ array의 길이 ≤ 100
+//1 ≤ array의 원소 ≤ 100
+//1 ≤ n ≤ 100
+//가장 가까운 수가 여러 개일 경우 더 작은 수를 return 합니다.
+
+func solution(_ array:[Int], _ n:Int) -> Int {
+    guard array.count > 1 else { return array[0]}
+    let sortedArray = array.sorted { abs($0 - n) < abs($1 - n) }
     
-    return ""
+    return abs(sortedArray[0] - n) == abs(sortedArray[1] - n) ? min(sortedArray[0], sortedArray[1]): sortedArray[0]
 }
 
-solution("abcabcadc")
-solution("abdc")
-solution("hello")
+func solution(_ array:[Int], _ n:Int) -> Int {
+    return array.min(by: { (abs($0 - n), $0) < (abs($1 - n), $1) })!
+}
+
+solution([3, 10, 28], 20)
+solution([10, 11, 12], 13)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
