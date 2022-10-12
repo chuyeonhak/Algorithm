@@ -1361,14 +1361,43 @@ import UIKit
 //0 ≤ num_list의 길이 ≤ 1000
 //2 ≤ n < num_list의 길이
 
-func solution(_ num_list:[Int], _ n:Int) -> [[Int]] {
-    var tempArray = [[Int]](repeating: [Int](repeating: 0, count: n), count: num_list.count / n)
-    
-    for i in (0..<num_list.count) {
-        tempArray[i / n][i % n] = num_list[i]
+//func solution(_ num_list:[Int], _ n:Int) -> [[Int]] {
+//    var tempArray = [[Int]](repeating: [Int](repeating: 0, count: n), count: num_list.count / n)
+//
+//    for i in (0..<num_list.count) {
+//        tempArray[i / n][i % n] = num_list[i]
+//    }
+//    return tempArray
+//}
+//
+//solution([1, 2, 3, 4, 5, 6, 7, 8], 2) -> [
+//solution([100, 95, 2, 4, 5, 6, 18, 33, 948], 3)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//배열 회전시키기
+//문제 설명
+//정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//1 ≤ numbers의 길이 ≤ 100
+//direction은 "left" 와 "right" 둘 중 하나입니다.
+
+func solution(_ numbers:[Int], _ direction:String) -> [Int] {
+    var tempArr = numbers
+    switch direction {
+    case "right":
+        tempArr.insert(numbers.last!, at: 0)
+        return tempArr.dropLast()
+    case "left":
+        tempArr.append(numbers.first!)
+        return Array(tempArr.dropFirst())
+    default: return []
     }
-    return tempArray
 }
 
-solution([1, 2, 3, 4, 5, 6, 7, 8], 2)
-solution([100, 95, 2, 4, 5, 6, 18, 33, 948], 3)
+solution([1, 2, 3], "right")
+solution([4, 455, 6, 4, -1, 45, 6], "left")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
