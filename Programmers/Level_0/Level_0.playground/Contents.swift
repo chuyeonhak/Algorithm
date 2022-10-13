@@ -1756,13 +1756,40 @@ import UIKit
 //서로 다른 두개 이상의 점이 겹치는 경우는 없습니다.
 //두 직선이 겹치는 경우(일치하는 경우)에도 1을 return 해주세요.
 
-func solution(_ dots:[[Int]]) -> Int { getInclination(dots[0], dots[1]) == getInclination(dots[2], dots[3]) || getInclination(dots[0], dots[2]) == getInclination(dots[1], dots[3]) || getInclination(dots[0], dots[3]) == getInclination(dots[1], dots[2]) ? 1 : 0 }
-
-private func getInclination(_ dot1: [Int], _ dot2: [Int]) -> Double { Double(dot1[1] - dot2[1]) / Double(dot1[0] - dot2[0]) }
-
-solution([[1, 4], [9, 2], [3, 8], [10, 4]])
-solution([[3, 5], [4, 1], [2, 4], [5, 10]])
-solution([[0, 3], [0, 5], [0, 6], [0, 8] ])
+//func solution(_ dots:[[Int]]) -> Int { getInclination(dots[0], dots[1]) == getInclination(dots[2], dots[3]) || getInclination(dots[0], dots[2]) == getInclination(dots[1], dots[3]) || getInclination(dots[0], dots[3]) == getInclination(dots[1], dots[2]) ? 1 : 0 }
+//
+//private func getInclination(_ dot1: [Int], _ dot2: [Int]) -> Double { Double(dot1[1] - dot2[1]) / Double(dot1[0] - dot2[0]) }
+//
+//solution([[1, 4], [9, 2], [3, 8], [10, 4]])
+//solution([[3, 5], [4, 1], [2, 4], [5, 10]])
+//solution([[0, 3], [0, 5], [0, 6], [0, 8] ])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//저주의 숫자 3
+//문제 설명
+//3x 마을 사람들은 3을 저주의 숫자라고 생각하기 때문에 3의 배수와 숫자 3을 사용하지 않습니다. 3x 마을 사람들의 숫자는 다음과 같습니다.
+//
+//10진법    3x 마을에서 쓰는 숫자    10진법    3x 마을에서 쓰는 숫자
+//1    1    6    8
+//2    2    7    10
+//3    4    8    11
+//4    5    9    14
+//5    7    10    16
+//정수 n이 매개변수로 주어질 때, n을 3x 마을에서 사용하는 숫자로 바꿔 return하도록 solution 함수를 완성해주세요.
+
+func solution(_ n:Int) -> Int {
+    var result = 0
+    (1...n).forEach { _ in 
+        result += 1
+        while String(result).contains("3") || result % 3 == 0 {
+            result += 1
+        }
+    }
+    
+    return result
+}
+
+solution(8)
+solution(15)
+solution(40)
