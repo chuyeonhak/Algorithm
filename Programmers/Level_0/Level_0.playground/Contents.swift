@@ -330,7 +330,22 @@ import UIKit
 //    }
 //    return [sumDenum, sumNum]
 //}
+
+//func solution(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
+//    var denominator = denum1 * num2 + denum2 * num1
+//    var numerator = num1 * num2
 //
+//    let maxDiv = min(denominator, numerator)
+//    for div in stride(from: maxDiv, to: 1, by: -1) {
+//        if denominator % div == 0 && numerator % div == 0 {
+//            denominator /= div
+//            numerator /= div
+//        }
+//    }
+//
+//    return [denominator, numerator]
+//}
+
 //solution(1, 2, 3, 4)
 //solution(9, 2, 1, 3)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -370,7 +385,7 @@ import UIKit
 //    let test = polynomial.components(separatedBy: " + ")
 //    var hasX: Int = 0
 //    var hasNot: Int = 0
-//    
+//
 //    test.forEach {
 //        if $0.hasSuffix("x") {
 //            hasX += Int($0.dropLast(1)) ?? 1
@@ -378,7 +393,7 @@ import UIKit
 //            hasNot += Int($0)!
 //        }
 //    }
-//    
+//
 //    switch (hasX, hasNot) {
 //    case (0, _):
 //        return "\(hasNot)"
@@ -1718,13 +1733,36 @@ import UIKit
 //spell의 원소를 모두 사용해 만들 수 있는 단어는 dic에 두 개 이상 존재하지 않습니다.
 //dic과 spell 모두 중복된 원소를 갖지 않습니다
 
-func solution(_ spell:[String], _ dic:[String]) -> Int { dic.filter { Set($0) == Set(spell.map { Character($0) }) }.isEmpty ? 2 : 1 }
-
-solution(["p", "o", "s"], ["sod", "eocd", "qixm", "adio", "soo"])
-solution(["z", "d", "x"], ["def", "dww", "dzx", "loveaw"])
-solution(["s", "o", "m", "d"], ["moos", "dzx", "smm", "sunmmo", "som"])
-
+//func solution(_ spell:[String], _ dic:[String]) -> Int { dic.filter { Set($0) == Set(spell.map { Character($0) }) }.isEmpty ? 2 : 1 }
+//
+//solution(["p", "o", "s"], ["sod", "eocd", "qixm", "adio", "soo"])
+//solution(["z", "d", "x"], ["def", "dww", "dzx", "loveaw"])
+//solution(["s", "o", "m", "d"], ["moos", "dzx", "smm", "sunmmo", "som"])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//평행
+//문제 설명
+//점 네 개의 좌표를 담은 이차원 배열  dots가 다음과 같이 매개변수로 주어집니다.
+//
+//[[x1, y1], [x2, y2], [x3, y3], [x4, y4]]
+//주어진 네 개의 점을 두 개씩 이었을 때, 두 직선이 평행이 되는 경우가 있으면 1을 없으면 0을 return 하도록 solution 함수를 완성해보세요.
+//
+//제한사항
+//0 ≤ dots의 원소 ≤ 100
+//dots의 길이 = 4
+//dots의 원소의 길이 = 2
+//dots의 원소는 [x, y] 형태이며 x, y는 정수입니다.
+//서로 다른 두개 이상의 점이 겹치는 경우는 없습니다.
+//두 직선이 겹치는 경우(일치하는 경우)에도 1을 return 해주세요.
 
+func solution(_ dots:[[Int]]) -> Int { getInclination(dots[0], dots[1]) == getInclination(dots[2], dots[3]) || getInclination(dots[0], dots[2]) == getInclination(dots[1], dots[3]) || getInclination(dots[0], dots[3]) == getInclination(dots[1], dots[2]) ? 1 : 0 }
+
+private func getInclination(_ dot1: [Int], _ dot2: [Int]) -> Double { Double(dot1[1] - dot2[1]) / Double(dot1[0] - dot2[0]) }
+
+solution([[1, 4], [9, 2], [3, 8], [10, 4]])
+solution([[3, 5], [4, 1], [2, 4], [5, 10]])
+solution([[0, 3], [0, 5], [0, 6], [0, 8] ])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
