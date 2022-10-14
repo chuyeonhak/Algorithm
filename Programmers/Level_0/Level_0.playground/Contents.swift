@@ -2124,19 +2124,56 @@ import UIKit
 //    return Int(result.sorted()[0] * result.sorted()[1])
 //}
 
-private func getLenght(_ dot1: [Int], _ dot2: [Int]) -> Double { sqrt(pow(Double(dot1[0] - dot2[0]), 2) + pow(Double(dot1[1] - dot2[1]), 2)) }
+//private func getLenght(_ dot1: [Int], _ dot2: [Int]) -> Double { sqrt(pow(Double(dot1[0] - dot2[0]), 2) + pow(Double(dot1[1] - dot2[1]), 2)) }
+//
+//func solution(_ dots:[[Int]]) -> Int {
+//    let a = [dots[1][0] - dots[0][0], dots[1][1] - dots[0][1]]
+//    print(dots[1][0])
+//    let b = [dots[2][0] - dots[0][0], dots[2][1] - dots[0][1]]
+//
+//    return abs(a[0]*b[1] - a[1]*b[0])
+//}
+//
+//solution([[1, 1], [2, 1],
+//          [2, 2], [1, 2]])
+//solution([[-1, -1], [1, 1], [1, -1], [-1, 1]])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-func solution(_ dots:[[Int]]) -> Int {
-    let a = [dots[1][0] - dots[0][0], dots[1][1] - dots[0][1]]
-    print(dots[1][0])
-    let b = [dots[2][0] - dots[0][0], dots[2][1] - dots[0][1]]
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//문자열 밀기
+//문제 설명
+//문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 A와 B가 매개변수로 주어질 때, A를 밀어서 B가 될 수 있다면 몇 번 밀어야 하는지 횟수를 return하고 밀어서 B가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+//
+//제한사항
+//0 < A의 길이 = B의 길이 < 100
+//A, B는 알파벳 소문자로 이루어져 있습니다.
 
-    return abs(a[0]*b[1] - a[1]*b[0])
+import Foundation
+
+func solution(_ A:String, _ B:String) -> Int {
+    var copy = B.map { $0 }
+    var result = 0
+
+    while true {
+        if String(copy) == A || result == A.count { break }
+        result += 1
+
+        let first = copy[0]
+        copy.removeFirst()
+        copy.append(first)
+
+    }
+
+    return result == A.count ? -1 : result
 }
 
-solution([[1, 1], [2, 1],
-          [2, 2], [1, 2]])
-solution([[-1, -1], [1, 1], [1, -1], [-1, 1]])
+func solution(_ A:String, _ B:String) -> Int {
+    let arr = (A+A).components(separatedBy: B))
+    return arr.count == 1 ? -1 : arr[1].count
+}
+
+solution("hello", "ohell")
+solution("apple", "elppa")
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
