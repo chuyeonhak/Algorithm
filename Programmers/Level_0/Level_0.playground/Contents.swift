@@ -1939,19 +1939,101 @@ import UIKit
 //1 ≤ numbers의 길이 ≤ 50
 //"zero"는 numbers의 맨 앞에 올 수 없습니다.
 
-func solution(_ numbers:String) -> Int64 {
-    let numberTupleList = [("zero", 0), ("one", 1), ("two", 2), ("three", 3), ("four", 4), ("five", 5), ("six", 6), ("seven", 7), ("eight", 8), ("nine", 9)]
-    var result = numbers
+//func solution(_ numbers:String) -> Int64 {
+//    let numberTupleList = [("zero", 0), ("one", 1), ("two", 2), ("three", 3), ("four", 4), ("five", 5), ("six", 6), ("seven", 7), ("eight", 8), ("nine", 9)]
+//    var result = numbers
+//
+//    for i in numberTupleList {
+//        result = result.replacingOccurrences(of: i.0, with: String(i.1))
+//    }
+//
+//    return Int64(result)!
+//}
+//
+//solution("onetwothreefourfivesixseveneightnine")
+//solution("onefourzerosixseven")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//안전지대
+//문제 설명
+//다음 그림과 같이 지뢰가 있는 지역과 지뢰에 인접한 위, 아래, 좌, 우 대각선 칸을 모두 위험지역으로 분류합니다.
+//지뢰는 2차원 배열 board에 1로 표시되어 있고 board에는 지뢰가 매설 된 지역 1과, 지뢰가 없는 지역 0만 존재합니다.
+//지뢰가 매설된 지역의 지도 board가 매개변수로 주어질 때, 안전한 지역의 칸 수를 return하도록 solution 함수를 완성해주세요.
+//제한사항
+//board는 n * n 배열입니다.
+//1 ≤ n ≤ 100
+//지뢰는 1로 표시되어 있습니다.
+//board에는 지뢰가 있는 지역 1과 지뢰가 없는 지역 0만 존재합니다.
+
+func solution(_ board:[[Int]]) -> Int {
+    var copyArray = board
     
-    for i in numberTupleList {
-        result = result.replacingOccurrences(of: i.0, with: String(i.1))
+    for array in board.enumerated() {
+        for i in array.element.enumerated() {
+            if i.element == 1 {
+                ((array.offset - 1)...(array.offset + 1)).forEach { one in
+                    ((i.offset - 1)...(i.offset + 1)).forEach { two in
+                        if (one < board.count && one >= 0) &&
+                            (two < array.element.count && two >= 0) &&
+                            (copyArray[one][two] != 1 && copyArray[one][two] != -1) {
+                            copyArray[one][two] = 1
+                        }
+                    }
+                }
+            }
+        }
     }
     
-    return Int64(result)!
+    return copyArray.map { $0.filter { ($0 == 0) }.count }.reduce(0, +)
 }
 
-solution("onetwothreefourfivesixseveneightnine")
-solution("onefourzerosixseven")
+func solution(_ board:[[Int]]) -> Int {
+    let n = board.count
+    var safeArea = Array(repeating: Array(repeating: true, count: n), count: n)
+
+    let dirs = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+    for r in (0..<n) {
+        for c in (0..<n) {
+            if board[r][c] == 1 {
+                safeArea[r][c] = false
+                for (dr, dc) in dirs {
+                    if 0 <= (r + dr) && (r + dr) < n && 0 <= (c + dc) && (c + dc) < n {
+                        safeArea[r + dr][c + dc] = false
+                    }
+                }
+            }
+        }
+    }
+
+    return safeArea.flatMap { $0 }.filter { $0 == true }.count
+}
+
+solution([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0]
+])
+
+solution([
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0]
+])
+//
+solution([
+    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1]
+])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
