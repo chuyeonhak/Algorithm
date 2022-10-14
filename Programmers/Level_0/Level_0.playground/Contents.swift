@@ -1966,74 +1966,104 @@ import UIKit
 //지뢰는 1로 표시되어 있습니다.
 //board에는 지뢰가 있는 지역 1과 지뢰가 없는 지역 0만 존재합니다.
 
-func solution(_ board:[[Int]]) -> Int {
-    var copyArray = board
-    
-    for array in board.enumerated() {
-        for i in array.element.enumerated() {
-            if i.element == 1 {
-                ((array.offset - 1)...(array.offset + 1)).forEach { one in
-                    ((i.offset - 1)...(i.offset + 1)).forEach { two in
-                        if (one < board.count && one >= 0) &&
-                            (two < array.element.count && two >= 0) &&
-                            (copyArray[one][two] != 1 && copyArray[one][two] != -1) {
-                            copyArray[one][two] = 1
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    return copyArray.map { $0.filter { ($0 == 0) }.count }.reduce(0, +)
-}
-
-func solution(_ board:[[Int]]) -> Int {
-    let n = board.count
-    var safeArea = Array(repeating: Array(repeating: true, count: n), count: n)
-
-    let dirs = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
-
-    for r in (0..<n) {
-        for c in (0..<n) {
-            if board[r][c] == 1 {
-                safeArea[r][c] = false
-                for (dr, dc) in dirs {
-                    if 0 <= (r + dr) && (r + dr) < n && 0 <= (c + dc) && (c + dc) < n {
-                        safeArea[r + dr][c + dc] = false
-                    }
-                }
-            }
-        }
-    }
-
-    return safeArea.flatMap { $0 }.filter { $0 == true }.count
-}
-
-solution([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0]
-])
-
-solution([
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 0]
-])
+//func solution(_ board:[[Int]]) -> Int {
+//    var copyArray = board
 //
-solution([
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1]
-])
+//    for array in board.enumerated() {
+//        for i in array.element.enumerated() {
+//            if i.element == 1 {
+//                ((array.offset - 1)...(array.offset + 1)).forEach { one in
+//                    ((i.offset - 1)...(i.offset + 1)).forEach { two in
+//                        if (one < board.count && one >= 0) &&
+//                            (two < array.element.count && two >= 0) &&
+//                            (copyArray[one][two] != 1 && copyArray[one][two] != -1) {
+//                            copyArray[one][two] = 1
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    return copyArray.map { $0.filter { ($0 == 0) }.count }.reduce(0, +)
+//}
+//
+//func solution(_ board:[[Int]]) -> Int {
+//    let n = board.count
+//    var safeArea = Array(repeating: Array(repeating: true, count: n), count: n)
+//
+//    let dirs = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+//
+//    for r in (0..<n) {
+//        for c in (0..<n) {
+//            if board[r][c] == 1 {
+//                safeArea[r][c] = false
+//                for (dr, dc) in dirs {
+//                    if 0 <= (r + dr) && (r + dr) < n && 0 <= (c + dc) && (c + dc) < n {
+//                        safeArea[r + dr][c + dc] = false
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    return safeArea.flatMap { $0 }.filter { $0 == true }.count
+//}
+//
+//solution([
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 1, 0, 0],
+//    [0, 0, 0, 0, 0]
+//])
+//
+//solution([
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 0, 0, 0],
+//    [0, 0, 1, 1, 0],
+//    [0, 0, 0, 0, 0]
+//])
+////
+//solution([
+//    [1, 1, 1, 1, 1, 1],
+//    [1, 1, 1, 1, 1, 1],
+//    [1, 1, 1, 1, 1, 1],
+//    [1, 1, 1, 1, 1, 1],
+//    [1, 1, 1, 1, 1, 1],
+//    [1, 1, 1, 1, 1, 1]
+//])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//연속된 수의 합
+//문제 설명
+//연속된 세 개의 정수를 더해 12가 되는 경우는 3, 4, 5입니다. 두 정수 num과 total이 주어집니다. 연속된 수 num개를 더한 값이 total이 될 때, 정수 배열을 오름차순으로 담아 return하도록 solution함수를 완성해보세요.
+//
+//제한사항
+//1 ≤ num ≤ 100
+//0 ≤ total ≤ 1000
+//num개의 연속된 수를 더하여 total이 될 수 없는 테스트 케이스는 없습니다.
+
+func solution(_ num:Int, _ total:Int) -> [Int] {
+    var result: [Int] = []
+    if num % 2 != 0 {
+        (-(num / 2)...(num / 2)).forEach {
+            result.append((total / num) + $0)
+        }
+    } else {
+        (0..<num).forEach {
+            result.append(((total / (num/2)) - (num-1)) / 2 + $0)
+        }
+    }
+    return result
+}
+
+solution(3, 12)
+solution(5, 15)
+solution(4, 14)
+solution(5, 5)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
