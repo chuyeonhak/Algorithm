@@ -1904,26 +1904,54 @@ import UIKit
 //1 ≤ board[1] ≤ 99
 //keyinput은 항상 up, down, left, right만 주어집니다.
 
-func solution(_ keyinput:[String], _ board:[Int]) -> [Int] {
-    var x = 0,
-        y = 0
+//func solution(_ keyinput:[String], _ board:[Int]) -> [Int] {
+//    var x = 0,
+//        y = 0
+//
+//    let maxX = ((board[0] - 1) / 2),
+//        maxY = ((board[1] - 1) / 2)
+//
+//    keyinput.forEach {
+//        switch $0 {
+//        case "right" where x < maxX: x += 1
+//        case "left" where x > -maxX: x -= 1
+//        case "up" where y < maxY: y += 1
+//        case "down" where y > -maxY: y -= 1
+//        default: break
+//        }
+//    }
+//
+//    return [x, y]
+//}
+//
+//solution(["left", "right", "up", "right", "right"], [11, 11])
+//solution(["down", "down", "down", "down", "down"], [7, 9])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//영어가 싫어요
+//문제 설명
+//영어가 싫은 머쓱이는 영어로 표기되어있는 숫자를 수로 바꾸려고 합니다. 문자열 numbers가 매개변수로 주어질 때, numbers를 정수로 바꿔 return 하도록 solution 함수를 완성해 주세요.
+//
+//제한사항
+//numbers는 소문자로만 구성되어 있습니다.
+//numbers는 "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" 들이 공백 없이 조합되어 있습니다.
+//1 ≤ numbers의 길이 ≤ 50
+//"zero"는 numbers의 맨 앞에 올 수 없습니다.
+
+func solution(_ numbers:String) -> Int64 {
+    let numberTupleList = [("zero", 0), ("one", 1), ("two", 2), ("three", 3), ("four", 4), ("five", 5), ("six", 6), ("seven", 7), ("eight", 8), ("nine", 9)]
+    var result = numbers
     
-    let maxX = ((board[0] - 1) / 2),
-        maxY = ((board[1] - 1) / 2)
-    
-    keyinput.forEach {
-        switch $0 {
-        case "right" where x < maxX: x += 1
-        case "left" where x > -maxX: x -= 1
-        case "up" where y < maxY: y += 1
-        case "down" where y > -maxY: y -= 1
-        default: break
-        }
+    for i in numberTupleList {
+        result = result.replacingOccurrences(of: i.0, with: String(i.1))
     }
     
-    return [x, y]
+    return Int64(result)!
 }
 
-solution(["left", "right", "up", "right", "right"], [11, 11])
-solution(["down", "down", "down", "down", "down"], [7, 9])
-    
+solution("onetwothreefourfivesixseveneightnine")
+solution("onefourzerosixseven")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
