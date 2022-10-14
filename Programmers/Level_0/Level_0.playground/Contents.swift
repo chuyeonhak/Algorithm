@@ -2046,24 +2046,62 @@ import UIKit
 //0 ≤ total ≤ 1000
 //num개의 연속된 수를 더하여 total이 될 수 없는 테스트 케이스는 없습니다.
 
-func solution(_ num:Int, _ total:Int) -> [Int] {
-    var result: [Int] = []
-    if num % 2 != 0 {
-        (-(num / 2)...(num / 2)).forEach {
-            result.append((total / num) + $0)
-        }
-    } else {
-        (0..<num).forEach {
-            result.append(((total / (num/2)) - (num-1)) / 2 + $0)
+//func solution(_ num:Int, _ total:Int) -> [Int] {
+//    var result: [Int] = []
+//    if num % 2 != 0 {
+//        (-(num / 2)...(num / 2)).forEach {
+//            result.append((total / num) + $0)
+//        }
+//    } else {
+//        (0..<num).forEach {
+//            result.append(((total / (num/2)) - (num-1)) / 2 + $0)
+//        }
+//    }
+//    return result
+//}
+//
+//solution(3, 12)
+//solution(5, 15)
+//solution(4, 14)
+//solution(5, 5)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//등수 매기기
+//문제 설명
+//영어 점수와 수학 점수의 평균 점수를 기준으로 학생들의 등수를 매기려고 합니다. 영어 점수와 수학 점수를 담은 2차원 정수 배열 score가 주어질 때, 영어 점수와 수학 점수의 평균을 기준으로 매긴 등수를 담은 배열을 return하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//0 ≤ score[0], score[1] ≤ 100
+//1 ≤ score의 길이 ≤ 10
+//score의 원소 길이는 2입니다.
+//score는 중복된 원소를 갖지 않습니다.
+
+func solution(_ score:[[Int]]) -> [Int] {
+    let avgArray = score.map { ($0[0] + $0[1]) }
+    var result = Array(repeating: 1, count: score.count)
+
+    for i in avgArray.enumerated() {
+        for j in avgArray {
+            if i.element != j && i.element < j {
+                result[i.offset] = result[i.offset] + 1
+            }
         }
     }
+
     return result
 }
 
-solution(3, 12)
-solution(5, 15)
-solution(4, 14)
-solution(5, 5)
+func solution(_ score:[[Int]]) -> [Int] {
+    let average = score.map { (Double($0[0] + $0[1]) / 2.0) }
+    let sortedAverage = average.sorted(by: >)
+    return average.map { (sortedAverage.firstIndex(of: $0) ?? 0) + 1 }
+}
+
+func solution(_ score: [[Int]]) -> [Int] { score.map { Double($0.reduce(0, +)) / Double($0.count) }.map { score.map { Double($0.reduce(0, +)) / Double($0.count) }.sorted(by: >).firstIndex(of: $0)! + 1 } }
+
+solution([[80, 70], [90, 50], [40, 70], [50, 80]])
+solution([[80, 70], [70, 80], [30, 50], [90, 100], [100, 90], [100, 100], [10, 30]])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
