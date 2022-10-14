@@ -1846,28 +1846,47 @@ import UIKit
 //1 ≤ babbling[i]의 길이 ≤ 30
 //문자열은 알파벳 소문자로만 이루어져 있습니다.
 
-func solution(_ babbling:[String]) -> Int {
-    let tempArr1 = ["aya", "ye", "woo", "ma"],
-        tempArr2 = ["ayaaya", "yeye", "woowoo", "mama"]
-    var result = 0
-    for babble in babbling {
-        var copy = babble
-        for i in tempArr2 {
-            copy = copy.replacingOccurrences(of: i, with: "x")
-        }
-        
-        for j in tempArr1 {
-            copy = copy.replacingOccurrences(of: j, with: "")
-        }
-        
-        if copy.isEmpty {
-            result += 1
-        }
-        
-    }
-    return result
-}
+//func solution(_ babbling:[String]) -> Int {
+//    let tempArr1 = ["aya", "ye", "woo", "ma"],
+//        tempArr2 = ["ayaaya", "yeye", "woowoo", "mama"]
+//    var result = 0
+//    for babble in babbling {
+//        var copy = babble
+//        for i in tempArr2 {
+//            copy = copy.replacingOccurrences(of: i, with: "x")
+//        }
+//
+//        for j in tempArr1 {
+//            copy = copy.replacingOccurrences(of: j, with: "")
+//        }
+//
+//        if copy.isEmpty {
+//            result += 1
+//        }
+//
+//    }
+//    return result
+//}
+//
+//solution(["aya", "yee", "u", "maa"])
+//solution(["ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"])
 
-solution(["aya", "yee", "u", "maa"])
-solution(["ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//이진수 더하기
+//문제 설명
+//이진수를 의미하는 두 개의 문자열 bin1과 bin2가 매개변수로 주어질 때, 두 이진수의 합을 return하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//return 값은 이진수를 의미하는 문자열입니다.
+//1 ≤ bin1, bin2의 길이 ≤ 10
+//bin1과 bin2는 "0"과 "1"로만 이루어져 있습니다.
+
+func solution(_ bin1:String, _ bin2:String) -> String {  String(UInt16(bin1, radix: 2)! + UInt16(bin2, radix: 2)!, radix: 2) }
+
+solution("10", "11")
+solution("1001", "1111")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
