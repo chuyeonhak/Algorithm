@@ -2284,31 +2284,56 @@ import UIKit
 //구슬을 고르는 순서는 고려하지 않습니다.
 //share ≤ balls
 
-func solution(_ balls:Int, _ share:Int) -> Int {
-    guard balls != 1 else { return 1 }
-    guard balls != share else { return 1 }
-    guard share != 1 else { return balls }
-    let zero = balls - share == 0 ? 1 : balls - share,
-        x = ((share + 1)...balls).reduce(1.0) { $0 * Double($1) },
-        y = (1...zero).reduce(1.0) { $0 * Double($1) }
+//func solution(_ balls:Int, _ share:Int) -> Int {
+//    guard balls != 1 else { return 1 }
+//    guard balls != share else { return 1 }
+//    guard share != 1 else { return balls }
+//    let zero = balls - share == 0 ? 1 : balls - share,
+//        x = ((share + 1)...balls).reduce(1.0) { $0 * Double($1) },
+//        y = (1...zero).reduce(1.0) { $0 * Double($1) }
+//
+//    return Int(x / y)
+//}
+//
+//func solution(_ balls:Int, _ share:Int) -> Int64 {
+//    var min = balls - share < share ? balls - share : share
+//
+//    var answer: Int64 = 1
+//    if min == 0 { return 1 }
+//    for i in 1...min {
+//        answer *= Int64(balls-min+i)
+//        answer /= Int64(i)
+//    }
+//    return answer
+//}
+//
+//solution(3, 2)
+//solution(5, 3)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//치킨 쿠폰
+//문제 설명
+//프로그래머스 치킨은 치킨을 시켜먹으면 한 마리당 쿠폰을 한 장 발급합니다. 쿠폰을 열 장 모으면 치킨을 한 마리 서비스로 받을 수 있고, 서비스 치킨에도 쿠폰이 발급됩니다. 시켜먹은 치킨의 수 chicken이 매개변수로 주어질 때 받을 수 있는 최대 서비스 치킨의 수를 return하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//chicken은 정수입니다.
+//0 ≤ chicken ≤ 1,000,000
+
+func solution(_ chicken:Int) -> Int {
+    var copy = chicken
+    var service = 0
     
-    return Int(x / y)
-}
-
-func solution(_ balls:Int, _ share:Int) -> Int64 {
-    var min = balls - share < share ? balls - share : share
-
-    var answer: Int64 = 1
-    if min == 0 { return 1 }
-    for i in 1...min {
-        answer *= Int64(balls-min+i)
-        answer /= Int64(i)
+    while copy / 10 != 0 {
+        service += copy / 10
+        copy = (copy / 10) + copy % 10
     }
-    return answer
+    return service
 }
 
-solution(3, 2)
-solution(5, 3)
+solution(100)
+solution(1081)
+
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
