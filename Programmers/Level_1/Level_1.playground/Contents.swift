@@ -683,9 +683,31 @@ import UIKit
 
 func solution(_ d:[Int], _ budget:Int) -> Int {
     guard d.reduce(0, +) > budget else { return d.count }
-    return 0
+    var result: [Int] = []
+    var count = 0
+    let sortedArr = d.sorted(by: <)
+    
+    while true {
+        if result.reduce(0, +) + sortedArr[count] > budget { break }
+        result.append(sortedArr[count])
+        count += 1
+    }
+    
+    return result.count
+}
+
+func solution(_ d:[Int], _ budget:Int) -> Int {
+    var budget = budget
+
+    return d.sorted().filter{
+        budget = budget - $0
+        return budget >= 0
+    }.count
 }
 
 solution([1,3,2,5,4], 9)
 solution([2,2,3,3], 10)
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
