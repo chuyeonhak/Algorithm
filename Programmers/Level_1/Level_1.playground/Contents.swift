@@ -681,33 +681,64 @@ import UIKit
 //d의 각 원소는 부서별로 신청한 금액을 나타내며, 부서별 신청 금액은 1 이상 100,000 이하의 자연수입니다.
 //budget은 예산을 나타내며, 1 이상 10,000,000 이하의 자연수입니다.
 
-func solution(_ d:[Int], _ budget:Int) -> Int {
-    guard d.reduce(0, +) > budget else { return d.count }
-    var result: [Int] = []
-    var count = 0
-    let sortedArr = d.sorted(by: <)
+//func solution(_ d:[Int], _ budget:Int) -> Int {
+//    guard d.reduce(0, +) > budget else { return d.count }
+//    var result: [Int] = []
+//    var count = 0
+//    let sortedArr = d.sorted(by: <)
+//
+//    while true {
+//        if result.reduce(0, +) + sortedArr[count] > budget { break }
+//        result.append(sortedArr[count])
+//        count += 1
+//    }
+//
+//    return result.count
+//}
+//
+//func solution(_ d:[Int], _ budget:Int) -> Int {
+//    var budget = budget
+//
+//    return d.sorted().filter{
+//        budget = budget - $0
+//        return budget >= 0
+//    }.count
+//}
+//
+//solution([1,3,2,5,4], 9)
+//solution([2,2,3,3], 10)
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//시저 암호
+//문제 설명
+//어떤 문장의 각 알파벳을 일정한 거리만큼 밀어서 다른 알파벳으로 바꾸는 암호화 방식을 시저 암호라고 합니다. 예를 들어 "AB"는 1만큼 밀면 "BC"가 되고, 3만큼 밀면 "DE"가 됩니다. "z"는 1만큼 밀면 "a"가 됩니다. 문자열 s와 거리 n을 입력받아 s를 n만큼 민 암호문을 만드는 함수, solution을 완성해 보세요.
+//
+//제한 조건
+//공백은 아무리 밀어도 공백입니다.
+//s는 알파벳 소문자, 대문자, 공백으로만 이루어져 있습니다.
+//s의 길이는 8000이하입니다.
+//n은 1 이상, 25이하인 자연수입니다.
+
+func solution(_ s:String, _ n:Int) -> String {
+    var result = ""
     
-    while true {
-        if result.reduce(0, +) + sortedArr[count] > budget { break }
-        result.append(sortedArr[count])
-        count += 1
+    s.forEach {
+        switch $0.asciiValue! + UInt8(n) {
+        case 91... where $0.isUppercase: result += String(UnicodeScalar($0.asciiValue! + UInt8(n) - 26))
+        case 123... where $0.isLowercase: result += String(UnicodeScalar($0.asciiValue! + UInt8(n) - 26))
+        case _ where $0.asciiValue! == 32: result += " "
+        default: result += String(UnicodeScalar($0.asciiValue! + UInt8(n)))
+        }
     }
     
-    return result.count
+    return result
 }
 
-func solution(_ d:[Int], _ budget:Int) -> Int {
-    var budget = budget
-
-    return d.sorted().filter{
-        budget = budget - $0
-        return budget >= 0
-    }.count
-}
-
-solution([1,3,2,5,4], 9)
-solution([2,2,3,3], 10)
-
+solution("AB", 1)
+solution("z", 1)
+solution("a B z", 4)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
