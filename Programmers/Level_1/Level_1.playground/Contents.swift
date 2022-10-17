@@ -385,22 +385,38 @@ import UIKit
 //signs의 길이는 absolutes의 길이와 같습니다.
 //signs[i] 가 참이면 absolutes[i] 의 실제 정수가 양수임을, 그렇지 않으면 음수임을 의미합니다.
 
-func solution(_ absolutes:[Int], _ signs:[Bool]) -> Int {
-    var result = 0
-    absolutes.enumerated()
-        .forEach({ index in
-            switch signs[index.offset] {
-            case true:
-                result += index.element
-            case false:
-                result -= index.element
-            }
-    })
-    return result
-}
+//func solution(_ absolutes:[Int], _ signs:[Bool]) -> Int {
+//    var result = 0
+//    absolutes.enumerated()
+//        .forEach({ index in
+//            switch signs[index.offset] {
+//            case true:
+//                result += index.element
+//            case false:
+//                result -= index.element
+//            }
+//    })
+//    return result
+//}
+//
+//solution([4,7,12], [true,false,true])
+//solution([1,2,3], [false,false,true])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-solution([4,7,12], [true,false,true])
-solution([1,2,3], [false,false,true])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//없는 숫자 더하기
+//문제 설명
+//0부터 9까지의 숫자 중 일부가 들어있는 정수 배열 numbers가 매개변수로 주어집니다. numbers에서 찾을 수 없는 0부터 9까지의 숫자를 모두 찾아 더한 수를 return 하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//1 ≤ numbers의 길이 ≤ 9
+//0 ≤ numbers의 모든 원소 ≤ 9
+//numbers의 모든 원소는 서로 다릅니다.
+
+func solution(_ numbers:[Int]) -> Int { 45 - numbers.reduce(0, +) }
+
+solution([1,2,3,4,6,7,8,0])
+solution([5,8,4,0,6,7,9])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
