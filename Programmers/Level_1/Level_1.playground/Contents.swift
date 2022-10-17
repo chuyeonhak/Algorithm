@@ -624,20 +624,44 @@ import UIKit
 //제한 사항
 //문자열 전체의 짝/홀수 인덱스가 아니라, 단어(공백을 기준)별로 짝/홀수 인덱스를 판단해야합니다.
 //첫 번째 글자는 0번째 인덱스로 보아 짝수번째 알파벳으로 처리해야 합니다.
-func solution(_ s:String) -> String {
-    s.components(separatedBy: " ")
-        .map {
-            $0.enumerated().map { str in
-                if str.offset % 2 == 0 {
-                    return str.element.uppercased()
-                } else {
-                    return str.element.lowercased()
-                }
-            }.joined()
-        }.joined(separator: " ")
+//func solution(_ s:String) -> String {
+//    s.components(separatedBy: " ")
+//        .map {
+//            $0.enumerated().map { str in
+//                if str.offset % 2 == 0 {
+//                    return str.element.uppercased()
+//                } else {
+//                    return str.element.lowercased()
+//                }
+//            }.joined()
+//        }.joined(separator: " ")
+//}
+//
+//solution("try hello world")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//3진법 뒤집기
+//문제 설명
+//자연수 n이 매개변수로 주어집니다. n을 3진법 상에서 앞뒤로 뒤집은 후, 이를 다시 10진법으로 표현한 수를 return 하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//n은 1 이상 100,000,000 이하인 자연수입니다.
+
+func solution(_ n:Int) -> Int {
+    var result = 0
+    let count = String(n, radix: 3).count
+    
+    String(n, radix: 3).enumerated().forEach {
+        let ternary = pow(3, ($0.offset))
+        result += Int(String($0.element))! * NSDecimalNumber(decimal: ternary).intValue
+    }
+    
+    return result
 }
 
-solution("try hello world")
+solution(45)
+solution(125)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
