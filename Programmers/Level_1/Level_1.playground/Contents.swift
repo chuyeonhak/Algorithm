@@ -880,34 +880,60 @@ import UIKit
 //}
 //
 //
-//extension Int {
-//    var isPrime: Bool {
-//        if (self < 4) {
-//            return self == 1 ? false : true
-//        }
-//        for i in 2...Int(sqrt(Double(self))) {
-//            if (self % i == 0) { return false }
-//        }
-//        return true
-//    }
-//}
-
-func solution(_ n:Int) -> Int {
-    var primes:[Bool] = [Bool](repeating:false, count:n+1)
-    var count = 0
-    for i in 2...n {
-        if !primes[i] {
-            count = count + 1
+extension Int {
+    var isPrime: Bool {
+        if (self < 4) {
+            return self == 1 ? false : true
         }
-        for j in 1...(n/i) {
-            primes[i * j] = true
+        for i in 2...Int(sqrt(Double(self))) {
+            if (self % i == 0) { return false }
         }
+        return true
     }
-    return count
 }
 
-solution(10)
-solution(5)
+//func solution(_ n:Int) -> Int {
+//    var primes:[Bool] = [Bool](repeating:false, count:n+1)
+//    var count = 0
+//    for i in 2...n {
+//        if !primes[i] {
+//            count = count + 1
+//        }
+//        for j in 1...(n/i) {
+//            primes[i * j] = true
+//        }
+//    }
+//    return count
+//}
+//
+//solution(10)
+//solution(5)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//소수 만들기
+//문제 설명
+//주어진 숫자 중 3개의 수를 더했을 때 소수가 되는 경우의 개수를 구하려고 합니다. 숫자들이 들어있는 배열 nums가 매개변수로 주어질 때, nums에 있는 숫자들 중 서로 다른 3개를 골라 더했을 때 소수가 되는 경우의 개수를 return 하도록 solution 함수를 완성해주세요.
+//
+//제한사항
+//nums에 들어있는 숫자의 개수는 3개 이상 50개 이하입니다.
+//nums의 각 원소는 1 이상 1,000 이하의 자연수이며, 중복된 숫자가 들어있지 않습니다.
+
+func solution(_ nums:[Int]) -> Int {
+    var intArr: [Int] = []
+    for i in 0..<nums.count {
+        for j in i + 1..<nums.count {
+            for k in j + 1..<nums.count {
+                intArr.append(nums[i] + nums[j] + nums[k])
+            }
+        }
+    }
+    
+    return intArr.filter { $0.isPrime }.count
+}
+
+solution([1,2,3,4])
+solution([1,2,7,6,4])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
