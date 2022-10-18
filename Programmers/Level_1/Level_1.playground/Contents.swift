@@ -844,24 +844,70 @@ import UIKit
 //-1,000 ≤ number의 각 원소 ≤ 1,000
 //서로 다른 학생의 정수 번호가 같을 수 있습니다.
 
-func solution(_ number:[Int]) -> Int {
-    var result = 0
-    for i in 0..<number.count {
-        for j in i + 1..<number.count {
-            for k in j + 1..<number.count {
-                if i != j && i != k && j != k, number[i] + number[j] + number[k] == 0 {
-                    result += 1
-                }
-            }
+//func solution(_ number:[Int]) -> Int {
+//    var result = 0
+//    for i in 0..<number.count {
+//        for j in i + 1..<number.count {
+//            for k in j + 1..<number.count {
+//                if i != j && i != k && j != k, number[i] + number[j] + number[k] == 0 {
+//                    result += 1
+//                }
+//            }
+//        }
+//    }
+//
+//    return result
+//}
+//
+//solution([-2, 3, 0, 2, -5])
+//solution([-3, -2, -1, 0, 1, 2, 3])
+//solution([-1, 1, -1, 1])
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//소수 찾기
+//문제 설명
+//1부터 입력받은 숫자 n 사이에 있는 소수의 개수를 반환하는 함수, solution을 만들어 보세요.
+//
+//소수는 1과 자기 자신으로만 나누어지는 수를 의미합니다.
+//(1은 소수가 아닙니다.)
+//
+//제한 조건
+//n은 2이상 1000000이하의 자연수입니다.
+
+//func solution(_ n:Int) -> Int {
+//    (2...n).filter { $0.isPrime }.count
+//}
+//
+//
+//extension Int {
+//    var isPrime: Bool {
+//        if (self < 4) {
+//            return self == 1 ? false : true
+//        }
+//        for i in 2...Int(sqrt(Double(self))) {
+//            if (self % i == 0) { return false }
+//        }
+//        return true
+//    }
+//}
+
+func solution(_ n:Int) -> Int {
+    var primes:[Bool] = [Bool](repeating:false, count:n+1)
+    var count = 0
+    for i in 2...n {
+        if !primes[i] {
+            count = count + 1
+        }
+        for j in 1...(n/i) {
+            primes[i * j] = true
         }
     }
-    
-    return result
+    return count
 }
 
-solution([-2, 3, 0, 2, -5])
-solution([-3, -2, -1, 0, 1, 2, 3])
-solution([-1, 1, -1, 1])
+solution(10)
+solution(5)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
