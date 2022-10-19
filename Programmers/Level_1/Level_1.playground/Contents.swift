@@ -1,5 +1,5 @@
 import UIKit
-
+import Foundation
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //짝수와 홀수
@@ -1080,45 +1080,86 @@ extension Int {
 //    }
 //}
 
-func solution(_ dartResult:String) -> Int {
-    let numberList = dartResult.split(whereSeparator: {$0.isLetter || $0 == "#" || $0 == "*"})
-    let letterList = dartResult.split(whereSeparator: {$0.isNumber})
-    var totalScore = 0
-    
-    for (i, (number, letter)) in zip(numberList, letterList).enumerated() {
-        var score = 0
-        if let number = Int(number) {
-            score = letter.contains("D") ? number * number : letter.contains("T") ? number * number * number : number
-            
-        }
-        
-        if letter.contains("*") {
-            score *= 2
-        } else if letter.contains("#") {
-            score = -score
-        }
-        
-        if i != 2 {
-            if letterList[i + 1].contains("*") {
-                score *= 2
-            }
-        }
-        
-        totalScore += score
-        
+//func solution(_ dartResult:String) -> Int {
+//    let numberList = dartResult.split(whereSeparator: {$0.isLetter || $0 == "#" || $0 == "*"})
+//    let letterList = dartResult.split(whereSeparator: {$0.isNumber})
+//    var totalScore = 0
+//
+//    for (i, (number, letter)) in zip(numberList, letterList).enumerated() {
+//        var score = 0
+//        if let number = Int(number) {
+//            score = letter.contains("D") ? number * number : letter.contains("T") ? number * number * number : number
+//
+//        }
+//
+//        if letter.contains("*") {
+//            score *= 2
+//        } else if letter.contains("#") {
+//            score = -score
+//        }
+//
+//        if i != 2 {
+//            if letterList[i + 1].contains("*") {
+//                score *= 2
+//            }
+//        }
+//
+//        totalScore += score
+//
+//    }
+//
+//
+//    return totalScore
+//}
+//
+//solution("1S2D*3T")
+//solution("1D2S#10S")
+//solution("1D2S0T")
+//solution("1S*2T*3S")
+//solution("1D#2S*3S")
+//solution("1T2D3D#")
+//solution("1D2S3T*")
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//최소직사각형
+//문제 설명
+//명함 지갑을 만드는 회사에서 지갑의 크기를 정하려고 합니다. 다양한 모양과 크기의 명함들을 모두 수납할 수 있으면서, 작아서 들고 다니기 편한 지갑을 만들어야 합니다. 이러한 요건을 만족하는 지갑을 만들기 위해 디자인팀은 모든 명함의 가로 길이와 세로 길이를 조사했습니다.
+//
+//아래 표는 4가지 명함의 가로 길이와 세로 길이를 나타냅니다.
+//
+//명함 번호    가로 길이    세로 길이
+//1    60    50
+//2    30    70
+//3    60    30
+//4    80    40
+//가장 긴 가로 길이와 세로 길이가 각각 80, 70이기 때문에 80(가로) x 70(세로) 크기의 지갑을 만들면 모든 명함들을 수납할 수 있습니다. 하지만 2번 명함을 가로로 눕혀 수납한다면 80(가로) x 50(세로) 크기의 지갑으로 모든 명함들을 수납할 수 있습니다. 이때의 지갑 크기는 4000(=80 x 50)입니다.
+//
+//모든 명함의 가로 길이와 세로 길이를 나타내는 2차원 배열 sizes가 매개변수로 주어집니다. 모든 명함을 수납할 수 있는 가장 작은 지갑을 만들 때, 지갑의 크기를 return 하도록 solution 함수를 완성해주세요.
+
+//func solution(_ sizes:[[Int]]) -> Int {
+//    let sortedArray = sizes.map { $0.sorted(by: >) }.sorted(by: { $0[0] > $1[0] })
+//
+//    sortedArray.max
+//
+//    return sortedArray.map { $0[0] }.max()! * sortedArray.map { $0[1] }.max()!
+//}
+
+func solution(_ sizes:[[Int]]) -> Int {
+    var maxNum = 0
+    var minNum = 0
+
+    for size in sizes {
+        maxNum = max(maxNum, size.max()!)
+        minNum = max(minNum, size.min()!)
+        print("max = \(maxNum), min = \(minNum)")
     }
-    
-    
-    return totalScore
+    return maxNum * minNum
 }
 
-solution("1S2D*3T")
-solution("1D2S#10S")
-solution("1D2S0T")
-solution("1S*2T*3S")
-solution("1D#2S*3S")
-solution("1T2D3D#")
-solution("1D2S3T*")
+solution([[60, 50], [30, 70], [60, 30], [80, 40]])
+solution([[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]])
+solution([[14, 4], [19, 6], [6, 16], [18, 7], [7, 11]])
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
