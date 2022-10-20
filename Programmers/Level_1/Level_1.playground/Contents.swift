@@ -1443,48 +1443,77 @@ extension Int {
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//func solution(_ board:[[Int]], _ moves:[Int]) -> Int {
+//    var myBoard: [[Int]] = Array(repeating: Array(repeating: 0, count: board.count), count: board.count)
+//    var basket: [Int] = []
+//    var cnt = 0
+//
+//    for i in 0..<board.count {
+//        for j in board.enumerated() {
+//            if j.element[i] != 0 {
+//                myBoard[i][j.offset] = j.element[i]
+//            }
+//        }
+//    }
+//    for i in myBoard.enumerated() {
+//        myBoard[i.offset].removeAll { $0 == 0 }
+//    }
+//
+//    for i in moves {
+//        if !(myBoard[i - 1].isEmpty) {
+//            basket.append(myBoard[i - 1].removeFirst())
+//        }
+//    }
+//
+//    firstLoop: while true {
+//        for i in basket.enumerated() {
+//            guard (basket.indices ~= i.offset - 1 && basket.indices ~= i.offset + 1) || basket.count == 2 else { continue }
+//            if basket [i.offset] == basket[i.offset + 1] {
+//                cnt += 2
+//                basket.remove(at: i.offset)
+//                basket.remove(at: i.offset)
+//                continue firstLoop
+//
+//            } else if basket [i.offset] == basket[i.offset - 1]  {
+//                cnt += 2
+//                basket.remove(at: i.offset - 1)
+//                basket.remove(at: i.offset - 1)
+//                continue firstLoop
+//            }
+//        }
+//        break firstLoop
+//    }
+//
+//    return cnt
+//}
+
 func solution(_ board:[[Int]], _ moves:[Int]) -> Int {
-    var myBoard: [[Int]] = Array(repeating: Array(repeating: 0, count: board.count), count: board.count)
-    var basket: [Int] = []
-    var cnt = 0
-    
-    for i in 0..<board.count {
-        for j in board.enumerated() {
-            if j.element[i] != 0 {
-                myBoard[i][j.offset] = j.element[i]
+    var count = 0
+    var stacks: [[Int]] = Array(repeating: [], count: board.count)
+    var bucket: [Int] = []
+
+    board.reversed().forEach {
+        $0.enumerated().forEach {
+            if $0.1 != 0 {
+                stacks[$0.0].append($0.1)
             }
         }
     }
-    for i in myBoard.enumerated() {
-        myBoard[i.offset].removeAll { $0 == 0 }
-    }
     
-    for i in moves {
-        if !(myBoard[i - 1].isEmpty) {
-            basket.append(myBoard[i - 1].removeFirst())
-        }
-    }
-    
-    firstLoop: while true {
-        for i in basket.enumerated() {
-            guard (basket.indices ~= i.offset - 1 && basket.indices ~= i.offset + 1) || basket.count == 2 else { continue }
-            if basket [i.offset] == basket[i.offset + 1] {
-                cnt += 2
-                basket.remove(at: i.offset)
-                basket.remove(at: i.offset)
-                continue firstLoop
-                
-            } else if basket [i.offset] == basket[i.offset - 1]  {
-                cnt += 2
-                basket.remove(at: i.offset - 1)
-                basket.remove(at: i.offset - 1)
-                continue firstLoop
+    print(stacks)
+
+    moves.forEach {
+        if let doll = stacks[$0-1].popLast() {
+            if let last = bucket.last, last == doll {
+                bucket.removeLast(1)
+                count += 2
+            } else {
+                bucket.append(doll)
             }
         }
-        break firstLoop
     }
-    
-    return cnt
+
+    return count
 }
 
 solution([[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]], [1,5,3,5,1,2,1,4])  //4
