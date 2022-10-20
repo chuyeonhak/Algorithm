@@ -1276,28 +1276,28 @@ extension Int {
 //만약 실패율이 같은 스테이지가 있다면 작은 번호의 스테이지가 먼저 오도록 하면 된다.
 //스테이지에 도달한 유저가 없는 경우 해당 스테이지의 실패율은 0 으로 정의한다.
 
-func solution(_ N:Int, _ stages:[Int]) -> [Int] {
-    var answer: [(Int, Float)] = []
-    var people: Float = Float(stages.count)
-    var countDic: [Int: Float] = [:]
-    
-    stages.forEach {
-        let count = countDic[$0] ?? 0
-        countDic[$0] = count + 1
-    }
-    
-    (1...N).map { i in
-        let value = Float(countDic[i] ?? 0) / people
-        
-        people -= Float(countDic[i] ?? 0)
-        answer.append((i, value))
-    }
-
-    return answer.sorted { $0.1 > $1.1 }.map({ $0.0 })
-}
-
-solution(5, [2, 1, 2, 6, 2, 4, 3, 3]) // [3,4,2,1,5]
-solution(4, [4,4,4,4,4])              // [4,1,2,3]
+//func solution(_ N:Int, _ stages:[Int]) -> [Int] {
+//    var answer: [(Int, Float)] = []
+//    var people: Float = Float(stages.count)
+//    var countDic: [Int: Float] = [:]
+//
+//    stages.forEach {
+//        let count = countDic[$0] ?? 0
+//        countDic[$0] = count + 1
+//    }
+//
+//    (1...N).map { i in
+//        let value = Float(countDic[i] ?? 0) / people
+//
+//        people -= Float(countDic[i] ?? 0)
+//        answer.append((i, value))
+//    }
+//
+//    return answer.sorted { $0.1 > $1.1 }.map({ $0.0 })
+//}
+//
+//solution(5, [2, 1, 2, 6, 2, 4, 3, 3]) // [3,4,2,1,5]
+//solution(4, [4,4,4,4,4])              // [4,1,2,3]
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1322,63 +1322,101 @@ solution(4, [4,4,4,4,4])              // [4,1,2,3]
 //"left"는 왼손잡이, "right"는 오른손잡이를 의미합니다.
 //왼손 엄지손가락을 사용한 경우는 L, 오른손 엄지손가락을 사용한 경우는 R을 순서대로 이어붙여 문자열 형태로 return 해주세요.
 
-func solution(_ numbers:[Int], _ hand:String) -> String {
-    let left = ["1", "4", "7"]
-    let right = ["3", "6", "9"]
-    let keyPad: [String: String] = ["1": "00", "2": "01", "3": "02", "4": "10", "5": "11", "6": "12", "7": "20", "8": "21", "9": "22", "*": "30", "0": "31", "#": "32"]
-    var previousLeft: String = keyPad["*"]!
-    var previousRight: String = keyPad["#"]!
+//func solution(_ numbers:[Int], _ hand:String) -> String {
+//    let left = ["1", "4", "7"]
+//    let right = ["3", "6", "9"]
+//    let keyPad: [String: String] = ["1": "00", "2": "01", "3": "02", "4": "10", "5": "11", "6": "12", "7": "20", "8": "21", "9": "22", "*": "30", "0": "31", "#": "32"]
+//    var previousLeft: String = keyPad["*"]!
+//    var previousRight: String = keyPad["#"]!
+//
+//    var copy = numbers.map { String($0) }
+//
+//    return copy.map {
+//        if left.contains($0) {
+//            previousLeft = keyPad[$0]!
+//            return "L"
+//        } else if right.contains($0) {
+//            previousRight = keyPad[$0]!
+//            return "R"
+//        } else {
+//            let distanceToLeft = getDistance(to: keyPad[$0]!, from: previousLeft),
+//                distanceToRight = getDistance(to: keyPad[$0]!, from: previousRight)
+//            print("distanceToLeft == \(distanceToLeft), distanceToRight == \(distanceToRight), base == \($0)")
+//            if distanceToLeft > distanceToRight {
+//                previousRight = keyPad[$0]!
+//                return "R"
+//            } else if distanceToLeft < distanceToRight {
+//                previousLeft = keyPad[$0]!
+//                return "L"
+//            } else {
+//                if hand == "right" {
+//                    previousRight = keyPad[$0]!
+//                    return "R"
+//                } else {
+//                    previousLeft = keyPad[$0]!
+//                    return "L"
+//                }
+//            }
+//        }
+//    }.joined()
+//}
+//
+//private func getDistance(to base: String, from place: String) -> Int {
+//    guard base != place else { return 0 }
+//    guard let x1 = Int(String(base.first!)),
+//          let y1 = Int(String(base.last!)),
+//          let x2 = Int(String(place.first!)),
+//          let y2 = Int(String(place.last!)) else { return 0 }
+//
+//
+//    return abs(x1 - x2) + abs(y1 - y2)
+//}
+//
+//
+//solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], "right") // "LRLLLRLLRRL"
+//solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], "left") // "LRLLRRLLLRR"
+//solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], "right") // "LLRLLRLLRL"
+//solution([1,3,4,6,7,9], "right")                    // "LRLRLR"
+//solution([1,2,3,2,2,1,3], "right")                  // "LLRRRLR"
+//solution([1,2,6,0,2,1,3], "right") // LLRR
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//콜라 문제
+//문제 설명
+//오래전 유행했던 콜라 문제가 있습니다. 콜라 문제의 지문은 다음과 같습니다.
+//
+//정답은 아무에게도 말하지 마세요.
+//
+//콜라 빈 병 2개를 가져다주면 콜라 1병을 주는 마트가 있다. 빈 병 20개를 가져다주면 몇 병을 받을 수 있는가?
+//
+//단, 보유 중인 빈 병이 2개 미만이면, 콜라를 받을 수 없다.
+//
+//문제를 풀던 상빈이는 콜라 문제의 완벽한 해답을 찾았습니다. 상빈이가 푼 방법은 아래 그림과 같습니다. 우선 콜라 빈 병 20병을 가져가서 10병을 받습니다. 받은 10병을 모두 마신 뒤, 가져가서 5병을 받습니다. 5병 중 4병을 모두 마신 뒤 가져가서 2병을 받고, 또 2병을 모두 마신 뒤 가져가서 1병을 받습니다. 받은 1병과 5병을 받았을 때 남은 1병을 모두 마신 뒤 가져가면 1병을 또 받을 수 있습니다. 이 경우 상빈이는 총 10 + 5 + 2 + 1 + 1 = 19병의 콜라를 받을 수 있습니다.
+//
+//
+//문제를 열심히 풀던 상빈이는 일반화된 콜라 문제를 생각했습니다. 이 문제는 빈 병 a개를 가져다주면 콜라 b병을 주는 마트가 있을 때, 빈 병 n개를 가져다주면 몇 병을 받을 수 있는지 계산하는 문제입니다. 기존 콜라 문제와 마찬가지로, 보유 중인 빈 병이 a개 미만이면, 추가적으로 빈 병을 받을 순 없습니다. 상빈이는 열심히 고심했지만, 일반화된 콜라 문제의 답을 찾을 수 없었습니다. 상빈이를 도와, 일반화된 콜라 문제를 해결하는 프로그램을 만들어 주세요.
+//
+//콜라를 받기 위해 마트에 주어야 하는 병 수 a, 빈 병 a개를 가져다 주면 마트가 주는 콜라 병 수 b, 상빈이가 가지고 있는 빈 병의 개수 n이 매개변수로 주어집니다. 상빈이가 받을 수 있는 콜라의 병 수를 return 하도록 solution 함수를 작성해주세요.
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+func solution(_ a:Int, _ b:Int, _ n:Int) -> Int {
+    var result = n
+    var service = 0
     
-    var copy = numbers.map { String($0) }
-    
-    return copy.map {
-        if left.contains($0) {
-            previousLeft = keyPad[$0]!
-            return "L"
-        } else if right.contains($0) {
-            previousRight = keyPad[$0]!
-            return "R"
-        } else {
-            let distanceToLeft = getDistance(to: keyPad[$0]!, from: previousLeft),
-                distanceToRight = getDistance(to: keyPad[$0]!, from: previousRight)
-            print("distanceToLeft == \(distanceToLeft), distanceToRight == \(distanceToRight), base == \($0)")
-            if distanceToLeft > distanceToRight {
-                previousRight = keyPad[$0]!
-                return "R"
-            } else if distanceToLeft < distanceToRight {
-                previousLeft = keyPad[$0]!
-                return "L"
-            } else {
-                if hand == "right" {
-                    previousRight = keyPad[$0]!
-                    return "R"
-                } else {
-                    previousLeft = keyPad[$0]!
-                    return "L"
-                }
-            }
-        }
-    }.joined()
+    while result / a > 0 {
+        service += (result / a) * b
+        result = (result / a) * b + result % a
+    }
+
+    return service
 }
 
-private func getDistance(to base: String, from place: String) -> Int {
-    guard base != place else { return 0 }
-    guard let x1 = Int(String(base.first!)),
-          let y1 = Int(String(base.last!)),
-          let x2 = Int(String(place.first!)),
-          let y2 = Int(String(place.last!)) else { return 0 }
-    
-    
-    return abs(x1 - x2) + abs(y1 - y2)
-}
-
-
-solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], "right") // "LRLLLRLLRRL"
-solution([7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], "left") // "LRLLRRLLLRR"
-solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], "right") // "LLRLLRLLRL"
-solution([1,3,4,6,7,9], "right")                    // "LRLRLR"
-solution([1,2,3,2,2,1,3], "right")                  // "LLRRRLR"
-solution([1,2,6,0,2,1,3], "right") // LLRR
+solution(2, 1, 20) // 19
+solution(3, 1, 20) // 9
+solution(3, 2, 20) // 36
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
