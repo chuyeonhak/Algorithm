@@ -381,28 +381,80 @@ import UIKit
 //정답은 [ 번호, 차례 ] 형태로 return 해주세요.
 //만약 주어진 단어들로 탈락자가 생기지 않는다면, [0, 0]을 return 해주세요.
 
-func solution(_ n:Int, _ words:[String]) -> [Int] {
-    var answer = [0, 0]
-    var duplicatedWord: [String: (indexs: [Int], count: Int)] = [:]
-    
-    words.enumerated().map {
-        var value = duplicatedWord[$0.element] ?? ([], 0)
-        value.indexs.append($0.offset)
-        duplicatedWord[$0.element] = (value.indexs, value.count + 1)
-    }
-    
-    let dic = duplicatedWord.filter({ $0.value.count > 1 })
-    print(dic)
-    for i in dic {
-        print((i.value.indexs[1] % n) + 1)
-    }
-    
-    return []
-}
-
-solution(3, ["tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"]) // [3,3]
+//func solution(_ n:Int, _ words:[String]) -> [Int] {
+//    var answer = [0, 0]
+//    var duplicatedWord: [String: (indexs: [Int], count: Int)] = [:]
+//    var tempStr: String = ""
+//
+//    words.enumerated().map {
+//        var value = duplicatedWord[$0.element] ?? ([], 0)
+//        value.indexs.append($0.offset)
+//        duplicatedWord[$0.element] = (value.indexs, value.count + 1)
+//    }
+//
+//    let dic = duplicatedWord.filter({ $0.value.count > 1 })
+//    if dic.isEmpty {
+//        for (index, word) in words.enumerated() {
+//            if tempStr.isEmpty || tempStr.last == word.first {
+//                tempStr.append(word)
+//            } else if tempStr.last != word.first {
+//                answer[0] = index % n + 1
+//                answer[1] = index / n + 1
+//                break
+//            }
+//        }
+//    } else {
+//        for i in dic {
+//            answer[0] = (i.value.indexs[1] % n) + 1
+//            answer[1] = ((i.value.indexs[1] / n) + 1)
+//        }
+//    }
+//
+//    return answer
+//}
+//
+//solution(3, ["tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"]) // [3,3]
 //solution(5, ["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"]) // [0,0]
 //solution(2, ["hello", "one", "even", "never", "now", "world", "draw"]) // [1,3]
-        
+//solution(2, ["hello", "hello"])
     
 
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//짝지어 제거하기
+//문제 설명
+//짝지어 제거하기는, 알파벳 소문자로 이루어진 문자열을 가지고 시작합니다. 먼저 문자열에서 같은 알파벳이 2개 붙어 있는 짝을 찾습니다. 그다음, 그 둘을 제거한 뒤, 앞뒤로 문자열을 이어 붙입니다. 이 과정을 반복해서 문자열을 모두 제거한다면 짝지어 제거하기가 종료됩니다. 문자열 S가 주어졌을 때, 짝지어 제거하기를 성공적으로 수행할 수 있는지 반환하는 함수를 완성해 주세요. 성공적으로 수행할 수 있으면 1을, 아닐 경우 0을 리턴해주면 됩니다.
+//
+//예를 들어, 문자열 S = baabaa 라면
+//
+//b aa baa → bb aa → aa →
+//
+//의 순서로 문자열을 모두 제거할 수 있으므로 1을 반환합니다.
+//
+//제한사항
+//문자열의 길이 : 1,000,000이하의 자연수
+//문자열은 모두 소문자로 이루어져 있습니다.
+func solution(_ s:String) -> Int {
+    guard s.count % 2 == 0 else { return 0 }
+    
+    var stack = ""
+    
+    s.map {
+        if stack.last == $0 {
+            stack.popLast()
+        } else {
+            stack.append($0)
+        }
+    }
+    
+    return stack.isEmpty ? 1: 0
+}
+
+solution("baabaa")  // 1
+solution("cdcd")    // 0
+solution("babbabbb")
+
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
