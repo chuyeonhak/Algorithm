@@ -133,26 +133,114 @@ import UIKit
 //s의 길이는 1 이상 150,000 이하입니다.
 //s에는 '1'이 최소 하나 이상 포함되어 있습니다.
 
-func solution(_ s:String) -> [Int] {
-    var copy = s
-    var zeroCount: [Int] = []
-    var transCount = 0
+//func solution(_ s:String) -> [Int] {
+//    var copy = s
+//    var zeroCount: [Int] = []
+//    var transCount = 0
+//
+//    while copy.count > 1 {
+//        let count = copy.count
+//
+//        zeroCount.append(copy.filter { $0 == "0" }.count)
+//        copy = String(count - zeroCount[transCount], radix: 2)
+//        transCount += 1
+//    }
+//
+//    return [transCount, zeroCount.reduce(0, +)]
+//}
+//
+//solution("110010101001")        // [3,8]
+//solution("01110")               // [3,3]
+//solution("1111111")             // [4,1]
     
-    while copy.count > 1 {
-        let count = copy.count
-        
-        zeroCount.append(copy.filter { $0 == "0" }.count)
-        copy = String(count - zeroCount[transCount], radix: 2)
-        transCount += 1
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//피보나치 수
+//문제 설명
+//피보나치 수는 F(0) = 0, F(1) = 1일 때, 1 이상의 n에 대하여 F(n) = F(n-1) + F(n-2) 가 적용되는 수 입니다.
+//
+//예를들어
+//
+//F(2) = F(0) + F(1) = 0 + 1 = 1
+//F(3) = F(1) + F(2) = 1 + 1 = 2
+//F(4) = F(2) + F(3) = 1 + 2 = 3
+//F(5) = F(3) + F(4) = 2 + 3 = 5
+//와 같이 이어집니다.
+//
+//2 이상의 n이 입력되었을 때, n번째 피보나치 수를 1234567으로 나눈 나머지를 리턴하는 함수, solution을 완성해 주세요.
+//
+//제한 사항
+//n은 2 이상 100,000 이하인 자연수입니다.
+
+func solution(_ n:Int) -> Int {
+    var fibo: [Int] = [0, 1, 1]
+    
+    for i in 3...n {
+        fibo.append((fibo[i - 1] + fibo[i - 2]) % 1234567)
     }
-    
-    return [transCount, zeroCount.reduce(0, +)]
+
+    return fibo[n]
 }
 
-solution("110010101001")        // [3,8]
-solution("01110")               // [3,3]
-solution("1111111")             // [4,1]
-    
+//struct matrix2x2 {
+//    var _00, _01, _10, _11: Int
+//
+//    init(_00: Int, _01: Int, _10: Int, _11: Int) {
+//        self._00 = _00 % 1234567
+//        self._01 = _01 % 1234567
+//        self._10 = _10 % 1234567
+//        self._11 = _11 % 1234567
+//    }
+//
+//    init(m: matrix2x2) {
+//        self._00 = m._00 % 1234567
+//        self._01 = m._01 % 1234567
+//        self._10 = m._10 % 1234567
+//        self._11 = m._11 % 1234567
+//    }
+//}
+//
+//func *(left: matrix2x2, right: matrix2x2) -> matrix2x2 {
+//    return matrix2x2(_00: left._00 * right._00 + left._10 * right._01,
+//                     _01: left._00 * right._10 + left._10 * right._11,
+//                     _10: left._10 * right._00 + left._11 * right._01,
+//                     _11: left._10 * right._10 + left._11 * right._11)
+//}
+//
+//func solution(_ n:Int) -> Int {
+//    var m = matrix2x2(_00: 1, _01: 0, _10: 0, _11: 1)
+//    var fibo = matrix2x2(_00: 1, _01: 1, _10: 1, _11: 0)
+//    var val = n
+//
+//    while val > 0 {
+//        if val % 2 == 1 {
+//            m = m * fibo
+//        }
+//
+//        fibo = fibo * fibo
+//        val /= 2
+//    }
+//
+//    return m._01
+//}
+
+//func solution(_ n: Int) -> Int {
+//    if n < 2 { return n }
+//    var fibonacci = Array(repeating: 0, count: n+1)
+//    fibonacci[0] = 0
+//    fibonacci[1] = 1
+//    for i in 2...n {
+//        fibonacci[i] = (fibonacci[i-1] + fibonacci[i-2]) % 1234567
+//    }
+//    print(fibonacci)
+//    return fibonacci[n]
+//}
+
+solution(3)     // 2
+solution(5)     // 5
+//solution(100000)
+//solution(30)
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
