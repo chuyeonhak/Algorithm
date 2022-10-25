@@ -86,6 +86,10 @@ class Solution {
 //        }
 //        return dp.map { $0.count }.max()!
 //    }
+//1662. Check If Two String Arrays are Equivalent
+//    func arrayStringsAreEqual(_ word1: [String], _ word2: [String]) -> Bool {
+//        return word1.joined() == word2.joined()
+//    }
 }
 
 
@@ -100,3 +104,12 @@ let solution = Solution()
 //solution.maxLength(["un","iq","ue"])
 //solution.maxLength(["cha","r","act","ers"])
 //solution.maxLength(["abcdefghijklmnopqrstuvwxyz"])
+
+//1662. Check If Two String Arrays are Equivalent
+//solution.arrayStringsAreEqual(["ab", "c"], ["a", "bc"])
+//solution.arrayStringsAreEqual(["a", "cb"], ["ab", "c"])
+//solution.arrayStringsAreEqual(["abc", "d", "defg"], ["abcddefg"])
+
+ 
+
+
