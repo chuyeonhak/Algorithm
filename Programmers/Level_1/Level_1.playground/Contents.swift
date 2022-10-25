@@ -1775,48 +1775,40 @@ extension Int {
 //return 하는 배열은 id_list에 담긴 id 순서대로 각 유저가 받은 결과 메일 수를 담으면 됩니다.
 
 func solution(_ id_list:[String], _ report:[String], _ k:Int) -> [Int] {
-    return []
+    var myDic: [String: Int] = [:]
+    var tempDic: [String: Set<String>] = [:]
+    var answer: [Int] = []
+    
+    report.forEach {
+        let report = $0.components(separatedBy: " "),
+            reportingId = report[0],
+            reportedId = report[1]
+        
+        var mySet = tempDic[reportingId] ?? []
+        mySet.insert(reportedId)
+        tempDic[reportingId] = mySet
+    }
+    
+    for i in tempDic.values {
+        for j in i {
+            myDic[j] = (myDic[j] ?? 0) + 1
+        }
+    }
+    
+    let sortedArr = myDic.filter { $0.value >= k }.map { $0.key }
+    
+    id_list.forEach { id in
+        let set = tempDic[id] ?? []
+        answer.append(set.intersection(Set(sortedArr)).count)
+    }
+    
+    return answer
 }
 
 solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2)     // [2,1,1,0]
 solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3)                                          // [0,0]
 
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
-//    var dic: [Int: [Int]] = [:]
-//
-//    let _ = nums.enumerated().forEach {
-//        var value = dic[$0.element] ?? []
-//        value.append($0.offset)
-//        dic[$0.element] = value
-//    }
-//
-//    let sortedDic = dic.filter { $0.value.count >= 2 }
-//
-//    for dic in sortedDic {
-//        for i in dic.value.enumerated() {
-//            guard  dic.value.indices ~= i.offset + 1 else { continue }
-//            if abs(dic.value[i.offset] - dic.value[i.offset + 1]) <= k {
-//                return true
-//            } else { continue }
-//        }
-//    }
-//
-//    return false
-//}
-
-func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
-        var dict = [Int: Int]()
-        for (currentIndex, num) in nums.enumerated() {
-            if let duplicateIndex = dict[num], currentIndex - duplicateIndex <= k {
-                return true
-            }
-            dict[num] = currentIndex
-        }
-        return false
-    }
-
-containsNearbyDuplicate([1,2,3,1], 3)
-containsNearbyDuplicate([1,0,1,1], 1)
-containsNearbyDuplicate([1,2,3,1,2,3], 2)
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
