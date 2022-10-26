@@ -155,6 +155,7 @@ class Solution {
 //        return answer
 //    }
     
+//278. First Bad Version
 //    func search(_ nums: [Int], _ target: Int) -> Int {
 //        var left = 0, right = nums.count-1
 //
@@ -172,6 +173,23 @@ class Solution {
 //
 //        return -1
 //    }
+    
+    func firstBadVersion(_ n: Int) -> Int {
+        var left = 1
+        var right = n
+        var middle = 0
+        
+        while left < right {
+            middle = left + (right - left) / 2
+            if !isBadVersion(middle) {
+                left = middle + 1
+            } else {
+                right = middle
+            }
+        }
+        
+        return left
+    }
 }
 
 
@@ -213,3 +231,7 @@ let solution = Solution()
 //704. Binary Search
 //solution.search([-1,0,3,5,9,12], 9)     // 4
 //solution.search([-1,0,3,5,9,12], 2)     // -1
+
+//278. First Bad Version
+solution.firstBadVersion(5)
+solution.firstBadVersion(1)
