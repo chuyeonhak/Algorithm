@@ -92,24 +92,24 @@ class Solution {
 //    }
     
 //523. Continuous Subarray Sum
-    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
-            var remainders = [Int: Int]()
-            remainders[0] = -1
-            var sum = 0
-            for i in 0..<nums.count {
-                sum += nums[i]
-                let remainder = sum % k
-                if let index = remainders[remainder] {
-                    
-                    if i - index > 1 {
-                        return true
-                    }
-                } else {
-                    remainders[remainder] = i
-                }
-            }
-            return false
-        }
+//    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
+//            var remainders = [Int: Int]()
+//            remainders[0] = -1
+//            var sum = 0
+//            for i in 0..<nums.count {
+//                sum += nums[i]
+//                let remainder = sum % k
+//                if let index = remainders[remainder] {
+//
+//                    if i - index > 1 {
+//                        return true
+//                    }
+//                } else {
+//                    remainders[remainder] = i
+//                }
+//            }
+//            return false
+//        }
     
 //1480. Running Sum of 1d Array
 //    func runningSum(_ nums: [Int]) -> [Int] {
@@ -122,6 +122,23 @@ class Solution {
 //
 //        return temArr
 //    }
+    
+//724. Find Pivot Index
+    func pivotIndex(_ nums: [Int]) -> Int {
+        var pivot = -1
+        
+        for i in 0..<nums.count {
+            let leftSum = nums[0..<i].reduce(0, +),
+                rightSum = nums[i + 1..<nums.count].reduce(0, +)
+            
+            if leftSum == rightSum {
+                pivot = i
+                break
+            }
+        }
+        
+        return pivot
+    }
 }
 
 
@@ -152,4 +169,10 @@ let solution = Solution()
 //solution.checkSubarraySum([0,1,0,3,0,4,0,4,0], 5)   // true
 
 //1480. Running Sum of 1d Array
-solution.runningSum([1, 2, 3, 4])
+//solution.runningSum([1, 2, 3, 4])
+
+//724. Find Pivot Index
+solution.pivotIndex([1,7,3,6,5,6])      // 3
+solution.pivotIndex([1, 2, 3])          // -1
+solution.pivotIndex([2, 1, -1])       // 0
+solution.pivotIndex([-1, 1, 2])         // 2
