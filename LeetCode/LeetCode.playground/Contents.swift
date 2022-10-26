@@ -124,21 +124,54 @@ class Solution {
 //    }
     
 //724. Find Pivot Index
-    func pivotIndex(_ nums: [Int]) -> Int {
-        var pivot = -1
-        
-        for i in 0..<nums.count {
-            let leftSum = nums[0..<i].reduce(0, +),
-                rightSum = nums[i + 1..<nums.count].reduce(0, +)
-            
-            if leftSum == rightSum {
-                pivot = i
-                break
-            }
-        }
-        
-        return pivot
-    }
+//    func pivotIndex(_ nums: [Int]) -> Int {
+//        var pivot = -1
+//
+//        for i in 0..<nums.count {
+//            let leftSum = nums[0..<i].reduce(0, +),
+//                rightSum = nums[i + 1..<nums.count].reduce(0, +)
+//
+//            if leftSum == rightSum {
+//                pivot = i
+//                break
+//            }
+//        }
+//
+//        return pivot
+//    }
+//704. Binary Search
+//    func search(_ nums: [Int], _ target: Int) -> Int {
+//        var answer = -1
+//        if !nums.contains(target) {
+//            return answer
+//        } else {
+//            nums.enumerated().map {
+//                if $0.element == target {
+//                    answer = $0.offset
+//                }
+//            }
+//        }
+//
+//        return answer
+//    }
+    
+//    func search(_ nums: [Int], _ target: Int) -> Int {
+//        var left = 0, right = nums.count-1
+//
+//        while left <= right {
+//            let pos = left + (right-left) / 2
+//            print(pos)
+//            if nums[pos] == target { return pos }
+//
+//            if target < nums[pos] {
+//                right = pos - 1
+//            } else {
+//                left = pos + 1
+//            }
+//        }
+//
+//        return -1
+//    }
 }
 
 
@@ -172,7 +205,11 @@ let solution = Solution()
 //solution.runningSum([1, 2, 3, 4])
 
 //724. Find Pivot Index
-solution.pivotIndex([1,7,3,6,5,6])      // 3
-solution.pivotIndex([1, 2, 3])          // -1
-solution.pivotIndex([2, 1, -1])       // 0
-solution.pivotIndex([-1, 1, 2])         // 2
+//solution.pivotIndex([1,7,3,6,5,6])      // 3
+//solution.pivotIndex([1, 2, 3])          // -1
+//solution.pivotIndex([2, 1, -1])       // 0
+//solution.pivotIndex([-1, 1, 2])         // 2
+
+//704. Binary Search
+//solution.search([-1,0,3,5,9,12], 9)     // 4
+//solution.search([-1,0,3,5,9,12], 2)     // -1
