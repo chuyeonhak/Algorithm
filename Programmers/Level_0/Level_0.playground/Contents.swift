@@ -2407,34 +2407,34 @@ import UIKit
 //    return result
 //}
 
-func solution(_ lines:[[Int]]) -> Int {
-    var tempDic: [Int: Int] = [:]
-    var result = 0
-    var key = 0
-    let sortedLine = lines.sorted { $0.min()! < $1.min()! }
-    if sortedLine[0].max()! == sortedLine[1].min()! && sortedLine[1].max()! == sortedLine[2].min()! { return 0 }
-    for line in lines {
-        for i in (line.min()!...line.max()!) {
-            let value = tempDic[i] ?? 0
-            tempDic.updateValue(value + 1, forKey: i)
-        }
-    }
-    
-    let sortedDic = tempDic.sorted(by: <).filter { $0.value >= 2 }.map { $0.key }
-    key = sortedDic.first!
-    sortedDic.map { $0 - sortedDic.first! }.forEach {
-        if $0 == key + 1 {
-            result += 1
-            key = $0
-        } else {
-            key = $0
-        }
-    }
-    
-    return result
-}
-
-solution([[0, 1], [2, 5], [3, 9]])
-solution([[1, -1], [1, 3], [9, 3]])
-solution([[0, 5], [3, 9], [1, 10]])
-solution([[-1, 0], [1, 2], [0, 1]])
+//func solution(_ lines:[[Int]]) -> Int {
+//    var tempDic: [Int: Int] = [:]
+//    var result = 0
+//    var key = 0
+//    let sortedLine = lines.sorted { $0.min()! < $1.min()! }
+//    if sortedLine[0].max()! == sortedLine[1].min()! && sortedLine[1].max()! == sortedLine[2].min()! { return 0 }
+//    for line in lines {
+//        for i in (line.min()!...line.max()!) {
+//            let value = tempDic[i] ?? 0
+//            tempDic.updateValue(value + 1, forKey: i)
+//        }
+//    }
+//
+//    let sortedDic = tempDic.sorted(by: <).filter { $0.value >= 2 }.map { $0.key }
+//    key = sortedDic.first!
+//    sortedDic.map { $0 - sortedDic.first! }.forEach {
+//        if $0 == key + 1 {
+//            result += 1
+//            key = $0
+//        } else {
+//            key = $0
+//        }
+//    }
+//
+//    return result
+//}
+//
+//solution([[0, 1], [2, 5], [3, 9]])
+//solution([[1, -1], [1, 3], [9, 3]])
+//solution([[0, 5], [3, 9], [1, 10]])
+//solution([[-1, 0], [1, 2], [0, 1]])

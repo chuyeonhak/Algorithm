@@ -90,6 +90,38 @@ class Solution {
 //    func arrayStringsAreEqual(_ word1: [String], _ word2: [String]) -> Bool {
 //        return word1.joined() == word2.joined()
 //    }
+    
+//523. Continuous Subarray Sum
+    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
+            var remainders = [Int: Int]()
+            remainders[0] = -1
+            var sum = 0
+            for i in 0..<nums.count {
+                sum += nums[i]
+                let remainder = sum % k
+                if let index = remainders[remainder] {
+                    
+                    if i - index > 1 {
+                        return true
+                    }
+                } else {
+                    remainders[remainder] = i
+                }
+            }
+            return false
+        }
+    
+//1480. Running Sum of 1d Array
+//    func runningSum(_ nums: [Int]) -> [Int] {
+//        var temArr = Array(repeating: 0, count: nums.count)
+//        temArr[0] = nums[0]
+//
+//        for i in 1..<nums.count {
+//            temArr[i] = temArr[i - 1] + nums[i]
+//        }
+//
+//        return temArr
+//    }
 }
 
 
@@ -110,6 +142,14 @@ let solution = Solution()
 //solution.arrayStringsAreEqual(["a", "cb"], ["ab", "c"])
 //solution.arrayStringsAreEqual(["abc", "d", "defg"], ["abcddefg"])
 
- 
+//523. Continuous Subarray Sum
+//solution.checkSubarraySum([23, 2, 4, 6, 7], 6)      // true
+//solution.checkSubarraySum([23, 2, 6, 4, 7], 6)      // true
+//solution.checkSubarraySum([23, 2, 6, 4, 7], 13)     // false
+//solution.checkSubarraySum([23,2,4,6,6], 7)          // true
+//solution.checkSubarraySum([5, 0, 0 ,0], 3)          // true
+//solution.checkSubarraySum([0], 1)                   // false
+//solution.checkSubarraySum([0,1,0,3,0,4,0,4,0], 5)   // true
 
-
+//1480. Running Sum of 1d Array
+solution.runningSum([1, 2, 3, 4])
