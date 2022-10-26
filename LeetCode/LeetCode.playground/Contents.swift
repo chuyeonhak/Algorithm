@@ -174,22 +174,52 @@ class Solution {
 //        return -1
 //    }
     
-    func firstBadVersion(_ n: Int) -> Int {
-        var left = 1
-        var right = n
-        var middle = 0
-        
-        while left < right {
-            middle = left + (right - left) / 2
-            if !isBadVersion(middle) {
-                left = middle + 1
-            } else {
-                right = middle
+//    func firstBadVersion(_ n: Int) -> Int {
+//        var left = 1
+//        var right = n
+//        var middle = 0
+//
+//        while left < right {
+//            middle = left + (right - left) / 2
+//            if !isBadVersion(middle) {
+//                left = middle + 1
+//            } else {
+//                right = middle
+//            }
+//        }
+//
+//        return left
+//    }
+    
+//35. Search Insert Position
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        for i in 0..<nums.count {
+            if target == nums[i] || target < nums[i] {
+                return i
             }
         }
         
-        return left
+        return nums.count
     }
+    
+    
+//    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+//        return searchInsert(nums, target, 0, nums.count - 1)
+//    }
+//
+//    func searchInsert(_ nums: [Int], _ target: Int, _ left: Int, _ right: Int) -> Int {
+//        if left > right {
+//            return right + 1
+//        }
+//
+//        let mid = (left + right) / 2
+//        if nums[mid] == target {
+//            return mid
+//        } else if nums[mid] > target {
+//            return searchInsert(nums, target, left, mid - 1)
+//        }
+//        return searchInsert(nums, target, mid + 1, right)
+//    }
 }
 
 
@@ -233,5 +263,11 @@ let solution = Solution()
 //solution.search([-1,0,3,5,9,12], 2)     // -1
 
 //278. First Bad Version
-solution.firstBadVersion(5)
-solution.firstBadVersion(1)
+//solution.firstBadVersion(5)
+//solution.firstBadVersion(1)
+
+//35. Search Insert Position
+solution.searchInsert([1,3,5,6], 5)     // 2
+solution.searchInsert([1,3,5,6], 2)     // 1
+solution.searchInsert([1,3,5,6], 7)     // 4
+solution.searchInsert([1,3,5,6], 0)     // 0
