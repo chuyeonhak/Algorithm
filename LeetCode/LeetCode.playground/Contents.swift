@@ -307,6 +307,21 @@ class Solution {
 //    func sortedSquares(_ nums: [Int]) -> [Int] {
 //        return nums.map { $0 * $0 }.sorted(by: <)
 //    }
+//189. Rotate Array
+//    func rotate(_ nums: inout [Int], _ k: Int) {
+//        if k == 0 || nums.count == 1 {
+//            return
+//        } else if nums.count < k {
+//            for _ in 1...k {
+//                nums.insert(nums.popLast()!, at: 0)
+//            }
+//
+//        } else {
+//            let slice = nums.dropFirst(nums.count - k)
+//            nums.removeLast(k)
+//            nums.insert(contentsOf: slice, at: 0)
+//        }
+//    }
 }
 
 
@@ -381,3 +396,10 @@ let solution = Solution()
 //solution.sortedSquares([-4,-1,0,3,10])
 //solution.sortedSquares([-7,-3,2,3,11])
 //solution.sortedSquares([-10000,-9999,-7,-5,0,0,10000])
+
+//189. Rotate Array
+//var hello = [-1,-100,3,99]
+//var hello2 = [1,2,3,4,5,6,7]
+//solution.rotate(&hello, 2)
+//solution.rotate(&hello2, 3)
+
