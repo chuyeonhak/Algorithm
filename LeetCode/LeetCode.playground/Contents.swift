@@ -236,8 +236,6 @@ class Solution {
 //        return head?.next
 //    }
     
-    
-    
 //    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
 //        return searchInsert(nums, target, 0, nums.count - 1)
 //    }
@@ -254,6 +252,39 @@ class Solution {
 //            return searchInsert(nums, target, left, mid - 1)
 //        }
 //        return searchInsert(nums, target, mid + 1, right)
+//    }
+    
+//205. Isomorphic Strings
+//    func isIsomorphic(_ s: String, _ t: String) -> Bool {
+//        var countS = 0
+//        var countT = 0
+//        var sDic = [Character: Int](),
+//            tDic = [Character: Int]()
+//
+//        s.map {
+//            if sDic[$0] == nil {
+//                sDic[$0] = countS
+//                countS += 1
+//            }
+//        }
+//
+//        t.map {
+//            if tDic[$0] == nil {
+//                tDic[$0] = countT
+//                countT += 1
+//            }
+//        }
+//
+//        return s.map { sDic[$0]! } == t.map { tDic[$0]! }
+//    }
+//    func isIsomorphic(_ s: String, _ t: String) -> Bool {
+//        var sdc = [Character:String.Index](), tdc = sdc
+//        for i in s.indices {
+//            guard sdc[s[i]] == tdc[t[i]] else { return false }
+//            sdc[s[i]] = i
+//            tdc[t[i]] = i
+//        }
+//        return true
 //    }
 }
 
@@ -310,3 +341,13 @@ let solution = Solution()
 
 //2. Add Two Numbers
 //solution.addTwoNumbers(ListNode(2, ListNode(4, ListNode(3))), ListNode(5, ListNode(6, ListNode(4))))
+
+
+// abcdefg
+//205. Isomorphic Strings
+//solution.isIsomorphic("egg", "add")
+//solution.isIsomorphic("foo", "bar")
+//solution.isIsomorphic("paper", "title")
+//solution.isIsomorphic("bbbaaaba", "aaabbbba")
+
+
