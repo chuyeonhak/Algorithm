@@ -286,6 +286,23 @@ class Solution {
 //        }
 //        return true
 //    }
+//392. Is Subsequence
+//    func isSubsequence(_ s: String, _ t: String) -> Bool {
+//        let arrS = s.map{ $0 }
+//        var idx = 0
+//
+//        for i in t {
+//            if idx == arrS.count { return true }
+//
+//            if i == arrS[idx] {
+//                idx += 1
+//            } else {
+//                continue
+//            }
+//        }
+//
+//        return idx == s.count
+//    }
 }
 
 
@@ -349,5 +366,11 @@ let solution = Solution()
 //solution.isIsomorphic("foo", "bar")
 //solution.isIsomorphic("paper", "title")
 //solution.isIsomorphic("bbbaaaba", "aaabbbba")
+
+//392. Is Subsequence
+//solution.isSubsequence("abc", "ahbgdc")
+//solution.isSubsequence("axc", "ahbgdc")
+//solution.isSubsequence("ab", "baab")
+//solution.isSubsequence("aaaaaa", "bbaaaa")
 
 
