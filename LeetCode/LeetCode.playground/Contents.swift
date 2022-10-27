@@ -303,6 +303,10 @@ class Solution {
 //
 //        return idx == s.count
 //    }
+//977. Squares of a Sorted Array
+//    func sortedSquares(_ nums: [Int]) -> [Int] {
+//        return nums.map { $0 * $0 }.sorted(by: <)
+//    }
 }
 
 
@@ -373,4 +377,7 @@ let solution = Solution()
 //solution.isSubsequence("ab", "baab")
 //solution.isSubsequence("aaaaaa", "bbaaaa")
 
-
+//977. Squares of a Sorted Array
+//solution.sortedSquares([-4,-1,0,3,10])
+//solution.sortedSquares([-7,-3,2,3,11])
+//solution.sortedSquares([-10000,-9999,-7,-5,0,0,10000])
