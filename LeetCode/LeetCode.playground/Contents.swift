@@ -322,6 +322,28 @@ class Solution {
 //            nums.insert(contentsOf: slice, at: 0)
 //        }
 //    }
+//3. Longest Substring Without Repeating Characters
+//    func lengthOfLongestSubstring(_ s: String) -> Int {
+//        if s.count == 0 {
+//            return 0
+//        } else if s.count == 1 {
+//            return 1
+//        }
+//        
+//        let arrS = s.map { $0 }
+//        var maxCount = 0
+//        
+//        for i in 0..<arrS.count {
+//            for j in (i + 1)..<arrS.count {
+//                if arrS[i] == arrS[j] {
+//                    maxCount = max(j - i, maxCount)
+//                    break
+//                }
+//            }
+//        }
+//        
+//        return maxCount
+//    }
 }
 
 
@@ -403,3 +425,9 @@ let solution = Solution()
 //solution.rotate(&hello, 2)
 //solution.rotate(&hello2, 3)
 
+//3. Longest Substring Without Repeating Characters
+//solution.lengthOfLongestSubstring("abcabcbb")
+//solution.lengthOfLongestSubstring("bbbbb")
+//solution.lengthOfLongestSubstring("pwwkew")
+//solution.lengthOfLongestSubstring("au")
+//solution.lengthOfLongestSubstring("aab")
