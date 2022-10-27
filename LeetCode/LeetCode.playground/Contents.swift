@@ -1,5 +1,12 @@
 import UIKit
 
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init() { self.val = 0; self.next = nil; }
+    public init(_ val: Int) { self.val = val; self.next = nil; }
+    public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
+}
 
 class Solution {
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -192,15 +199,43 @@ class Solution {
 //    }
     
 //35. Search Insert Position
-    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
-        for i in 0..<nums.count {
-            if target == nums[i] || target < nums[i] {
-                return i
-            }
-        }
-        
-        return nums.count
-    }
+//    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+//        for i in 0..<nums.count {
+//            if target == nums[i] || target < nums[i] {
+//                return i
+//            }
+//        }
+//
+//        return nums.count
+//    }
+    
+//2. Add Two Numbers
+//    Definition for singly-linked list.
+//    func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+//        var copyl1 = l1
+//        var copyl2 = l2
+//
+//        var result: ListNode? = ListNode()
+//        let head = result
+//
+//        var carry = 0
+//        while copyl1 != nil || copyl2 != nil || carry > 0 {
+//            let first = copyl1?.val ?? 0,
+//                second = copyl2?.val ?? 0,
+//                sum = first + second + carry
+//
+//            let value = sum % 10
+//            carry = sum / 10
+//
+//            result?.next = ListNode(value)
+//            result = result?.next
+//            copyl1 = copyl1?.next
+//            copyl2 = copyl2?.next
+//        }
+//
+//        return head?.next
+//    }
+    
     
     
 //    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
@@ -267,7 +302,11 @@ let solution = Solution()
 //solution.firstBadVersion(1)
 
 //35. Search Insert Position
-solution.searchInsert([1,3,5,6], 5)     // 2
-solution.searchInsert([1,3,5,6], 2)     // 1
-solution.searchInsert([1,3,5,6], 7)     // 4
-solution.searchInsert([1,3,5,6], 0)     // 0
+//solution.searchInsert([1,3,5,6], 5)     // 2
+//solution.searchInsert([1,3,5,6], 2)     // 1
+//solution.searchInsert([1,3,5,6], 7)     // 4
+//solution.searchInsert([1,3,5,6], 0)     // 0
+
+
+//2. Add Two Numbers
+//solution.addTwoNumbers(ListNode(2, ListNode(4, ListNode(3))), ListNode(5, ListNode(6, ListNode(4))))
