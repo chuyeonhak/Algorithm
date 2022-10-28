@@ -493,14 +493,28 @@ class Solution {
 //    }
     
 //2154. Keep Multiplying Found Values by Two
-    func findFinalValue(_ nums: [Int], _ original: Int) -> Int {
-        var copy = original
+//    func findFinalValue(_ nums: [Int], _ original: Int) -> Int {
+//        var copy = original
+//
+//        while nums.contains(copy) {
+//            copy *= 2
+//        }
+//
+//        return copy
+//    }
+    
+//1346. Check If N and Its Double Exist
+    func checkIfExist(_ arr: [Int]) -> Bool {
+        var set = Set<Int>()
         
-        while nums.contains(copy) {
-            copy *= 2
+        for i in arr {
+            if set.contains(i * 2) { return true }
+            if i % 2 == 0 && set.contains(i / 2) {
+                return true
+            }
+            set.insert(i)
         }
-        
-        return copy
+        return false
     }
 }
 
@@ -630,5 +644,9 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.finalValueAfterOperations(["--X","X++","X++"])
 
 //2154. Keep Multiplying Found Values by Two
-solution.findFinalValue([5,3,6,1,12], 3)
-solution.findFinalValue([2,7,9], 4)
+//solution.findFinalValue([5,3,6,1,12], 3)
+//solution.findFinalValue([2,7,9], 4)
+
+//1346. Check If N and Its Double Exist
+solution.checkIfExist([10,2,5,3])
+solution.checkIfExist([3,1,7,11])
