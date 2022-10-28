@@ -329,10 +329,10 @@ class Solution {
 //        } else if s.count == 1 {
 //            return 1
 //        }
-//        
+//
 //        let arrS = s.map { $0 }
 //        var maxCount = 0
-//        
+//
 //        for i in 0..<arrS.count {
 //            for j in (i + 1)..<arrS.count {
 //                if arrS[i] == arrS[j] {
@@ -341,9 +341,23 @@ class Solution {
 //                }
 //            }
 //        }
-//        
+//
 //        return maxCount
 //    }
+
+//49. Group Anagrams
+    func groupAnagrams(_ strs: [String]) -> [[String]] {
+        var tempDic = [[Character]: [String]]()
+        
+        for i in strs {
+            let chars = i.map { $0 }.sorted()
+            var strArr = tempDic[chars] ?? []
+            strArr.append(i)
+            tempDic[chars] = strArr
+        }
+        
+        return tempDic.values.sorted(by: { $0.count < $1.count })
+    }
 }
 
 
@@ -431,3 +445,9 @@ let solution = Solution()
 //solution.lengthOfLongestSubstring("pwwkew")
 //solution.lengthOfLongestSubstring("au")
 //solution.lengthOfLongestSubstring("aab")
+
+//49. Group Anagrams
+solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
+//solution.groupAnagrams([""])
+//solution.groupAnagrams(["a"])
+solution.groupAnagrams(["ddddddddddg","dgggggggggg"])
