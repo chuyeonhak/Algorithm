@@ -8,6 +8,19 @@ public class ListNode {
     public init(_ val: Int, _ next: ListNode?) { self.val = val; self.next = next; }
 }
 
+public class TreeNode {
+    public var val: Int
+    public var left: TreeNode?
+    public var right: TreeNode?
+    public init() { self.val = 0; self.left = nil; self.right = nil; }
+    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+        self.val = val
+        self.left = left
+        self.right = right
+    }
+}
+
 class Solution {
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //219. Contains Duplicate II
@@ -414,7 +427,7 @@ class Solution {
     
 //167. Two Sum II - Input Array Is Sorted
 //    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
-//        
+//
 //        for i in 0..<numbers.count {
 //            for j in i + 1..<numbers.count {
 //                if numbers[i] + numbers[j] == target {
@@ -422,26 +435,42 @@ class Solution {
 //                }
 //            }
 //        }
-//        
+//
 //        return []
 //    }
-    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
-        guard !numbers.isEmpty else { return [] }
-        var i = 0
-        var j = numbers.count - 1
-        
-        while i < j {
-            guard numbers[i] + numbers[j] != target else { break }
-            
-            if numbers[i] + numbers[j] > target {
-                j -= 1
-            } else {
-                i += 1
-            }
-        }
-        
-        return [i + 1, j + 1]
-    }
+//    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+//        guard !numbers.isEmpty else { return [] }
+//        var i = 0
+//        var j = numbers.count - 1
+//
+//        while i < j {
+//            guard numbers[i] + numbers[j] != target else { break }
+//
+//            if numbers[i] + numbers[j] > target {
+//                j -= 1
+//            } else {
+//                i += 1
+//            }
+//        }
+//
+//        return [i + 1, j + 1]
+//    }
+    
+//653. Two Sum IV - Input is a BST
+//    func findTarget(_ root: TreeNode?, _ k: Int) -> Bool {
+//        var values = Set<Int>()
+//
+//        func rec(_ node: TreeNode?) -> Bool {
+//            guard let node = node else { return false }
+//
+//            if values.contains(k - node.val) { return true }
+//
+//            values.insert(node.val)
+//            return rec(node.left) || rec(node.right)
+//        }
+//
+//        return rec(root)
+//    }
 }
 
 
@@ -552,6 +581,9 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.moveZeroes(&nums3)
 
 //167. Two Sum II - Input Array Is Sorted
-solution.twoSum([2,7,11,15], 9)
-solution.twoSum([2,3,4], 6)
-solution.twoSum([-1,0], -1)
+//solution.twoSum([2,7,11,15], 9)
+//solution.twoSum([2,3,4], 6)
+//solution.twoSum([-1,0], -1)
+
+//653. Two Sum IV - Input is a BST
+
