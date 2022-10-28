@@ -471,6 +471,10 @@ class Solution {
 //
 //        return rec(root)
 //    }
+//1920. Build Array from Permutation
+    func buildArray(_ nums: [Int]) -> [Int] {
+        return nums.map { nums[$0] }
+    }
 }
 
 
@@ -587,3 +591,6 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 
 //653. Two Sum IV - Input is a BST
 
+//1920. Build Array from Permutation
+solution.buildArray([0,2,1,5,3,4])
+solution.buildArray([5,0,1,2,3,4])
