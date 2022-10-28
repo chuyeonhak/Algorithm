@@ -346,17 +346,31 @@ class Solution {
 //    }
 
 //49. Group Anagrams
-    func groupAnagrams(_ strs: [String]) -> [[String]] {
-        var tempDic = [[Character]: [String]]()
+//    func groupAnagrams(_ strs: [String]) -> [[String]] {
+//        var tempDic = [[Character]: [String]]()
+//
+//        for i in strs {
+//            let chars = i.map { $0 }.sorted()
+//            var strArr = tempDic[chars] ?? []
+//            strArr.append(i)
+//            tempDic[chars] = strArr
+//        }
+//
+//        return tempDic.values.sorted(by: { $0.count < $1.count })
+//    }
+    
+//21. Merge Two Sorted Lists
+    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+        guard let l1 = list1 else { return list2 }
+        guard let l2 = list2 else { return list1 }
         
-        for i in strs {
-            let chars = i.map { $0 }.sorted()
-            var strArr = tempDic[chars] ?? []
-            strArr.append(i)
-            tempDic[chars] = strArr
+        if l1.val <= l2.val {
+            l1.next = mergeTwoLists(l1.next, l2)
+            return l1
         }
         
-        return tempDic.values.sorted(by: { $0.count < $1.count })
+        l2.next = mergeTwoLists(l1, l2.next)
+        return l2
     }
 }
 
@@ -447,7 +461,13 @@ let solution = Solution()
 //solution.lengthOfLongestSubstring("aab")
 
 //49. Group Anagrams
-solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
+//solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
 //solution.groupAnagrams([""])
 //solution.groupAnagrams(["a"])
-solution.groupAnagrams(["ddddddddddg","dgggggggggg"])
+//solution.groupAnagrams(["ddddddddddg","dgggggggggg"])
+
+//21. Merge Two Sorted Lists
+let listNode1 = ListNode(1, ListNode(2, ListNode(4)))
+let listNode2 = ListNode(1, ListNode(3, ListNode(4)))
+solution.mergeTwoLists(listNode1, listNode2)
+//solution.mergeTwoLists(listNode3, listNode4)
