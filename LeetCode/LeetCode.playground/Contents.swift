@@ -360,17 +360,31 @@ class Solution {
 //    }
     
 //21. Merge Two Sorted Lists
-    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
-        guard let l1 = list1 else { return list2 }
-        guard let l2 = list2 else { return list1 }
+//    func mergeTwoLists(_ list1: ListNode?, _ list2: ListNode?) -> ListNode? {
+//        guard let l1 = list1 else { return list2 }
+//        guard let l2 = list2 else { return list1 }
+//
+//        if l1.val <= l2.val {
+//            l1.next = mergeTwoLists(l1.next, l2)
+//            return l1
+//        }
+//
+//        l2.next = mergeTwoLists(l1, l2.next)
+//        return l2
+//    }
+    
+//206. Reverse Linked List
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        return reverseListInternal(head, nil)
+    }
+    
+    func reverseListInternal(_ current: ListNode?, _ previous: ListNode?) -> ListNode? {
+        guard let current = current else { return previous }
         
-        if l1.val <= l2.val {
-            l1.next = mergeTwoLists(l1.next, l2)
-            return l1
-        }
+        let next = current.next
+        current.next = previous
         
-        l2.next = mergeTwoLists(l1, l2.next)
-        return l2
+        return reverseListInternal(next, current)
     }
 }
 
@@ -467,7 +481,9 @@ let solution = Solution()
 //solution.groupAnagrams(["ddddddddddg","dgggggggggg"])
 
 //21. Merge Two Sorted Lists
-let listNode1 = ListNode(1, ListNode(2, ListNode(4)))
-let listNode2 = ListNode(1, ListNode(3, ListNode(4)))
-solution.mergeTwoLists(listNode1, listNode2)
+let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+//let listNode2 = ListNode(1, ListNode(3, ListNode(4)))
+//solution.mergeTwoLists(listNode1, listNode2)
 //solution.mergeTwoLists(listNode3, listNode4)
+
+solution.reverseList(listNode1)
