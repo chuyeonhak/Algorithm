@@ -482,14 +482,25 @@ class Solution {
 //    }
     
 //2011. Final Value of Variable After Performing Operations
-    func finalValueAfterOperations(_ operations: [String]) -> Int {
-        var result = 0
+//    func finalValueAfterOperations(_ operations: [String]) -> Int {
+//        var result = 0
+//
+//        operations.map {
+//            $0.contains("+") ? (result += 1): (result -= 1)
+//        }
+//
+//        return result
+//    }
+    
+//2154. Keep Multiplying Found Values by Two
+    func findFinalValue(_ nums: [Int], _ original: Int) -> Int {
+        var copy = original
         
-        operations.map {
-            $0.contains("+") ? (result += 1): (result -= 1)
+        while nums.contains(copy) {
+            copy *= 2
         }
         
-        return result
+        return copy
     }
 }
 
@@ -616,4 +627,8 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.getConcatenation([1,3,2,1])
 
 //2011. Final Value of Variable After Performing Operations
-solution.finalValueAfterOperations(["--X","X++","X++"])
+//solution.finalValueAfterOperations(["--X","X++","X++"])
+
+//2154. Keep Multiplying Found Values by Two
+solution.findFinalValue([5,3,6,1,12], 3)
+solution.findFinalValue([2,7,9], 4)
