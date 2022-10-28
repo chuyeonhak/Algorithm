@@ -477,8 +477,19 @@ class Solution {
 //    }
     
 //1929. Concatenation of Array
-    func getConcatenation(_ nums: [Int]) -> [Int] {
-        return nums + nums
+//    func getConcatenation(_ nums: [Int]) -> [Int] {
+//        return nums + nums
+//    }
+    
+//2011. Final Value of Variable After Performing Operations
+    func finalValueAfterOperations(_ operations: [String]) -> Int {
+        var result = 0
+        
+        operations.map {
+            $0.contains("+") ? (result += 1): (result -= 1)
+        }
+        
+        return result
     }
 }
 
@@ -601,5 +612,8 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.buildArray([5,0,1,2,3,4])
 
 //1929. Concatenation of Array
-solution.getConcatenation([1,2,1])
-solution.getConcatenation([1,3,2,1])
+//solution.getConcatenation([1,2,1])
+//solution.getConcatenation([1,3,2,1])
+
+//2011. Final Value of Variable After Performing Operations
+solution.finalValueAfterOperations(["--X","X++","X++"])
