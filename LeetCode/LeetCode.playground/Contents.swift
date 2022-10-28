@@ -374,17 +374,42 @@ class Solution {
 //    }
     
 //206. Reverse Linked List
-    func reverseList(_ head: ListNode?) -> ListNode? {
-        return reverseListInternal(head, nil)
-    }
-    
-    func reverseListInternal(_ current: ListNode?, _ previous: ListNode?) -> ListNode? {
-        guard let current = current else { return previous }
-        
-        let next = current.next
-        current.next = previous
-        
-        return reverseListInternal(next, current)
+//    func reverseList(_ head: ListNode?) -> ListNode? {
+//        return reverseListInternal(head, nil)
+//    }
+//
+//    func reverseListInternal(_ current: ListNode?, _ previous: ListNode?) -> ListNode? {
+//        guard let current = current else { return previous }
+//
+//        let next = current.next
+//        current.next = previous
+//
+//        return reverseListInternal(next, current)
+//    }
+
+//283. Move Zeroes
+//    func moveZeroes(_ nums: inout [Int]) {
+//        var idxArr = [Int]()
+//        for i in 0..<nums.count {
+//            if nums[i] == 0 {
+//                idxArr.append(i)
+//            }
+//        }
+//
+//        nums.removeAll { $0 == 0 }
+//        nums.append(contentsOf: idxArr.map { _ in 0 })
+//    }
+    func moveZeroes(_ nums: inout [Int]) {
+        var writeIdx = 0
+        // Move non-zero items
+        for num in nums where num != 0 {
+            nums[writeIdx] = num
+            writeIdx += 1
+        }
+        // Fill the remaining with zero
+        for i in writeIdx..<nums.count {
+            nums[i] = 0
+        }
     }
 }
 
@@ -486,4 +511,12 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.mergeTwoLists(listNode1, listNode2)
 //solution.mergeTwoLists(listNode3, listNode4)
 
-solution.reverseList(listNode1)
+//solution.reverseList(listNode1)
+//283. Move Zeroes
+var nums1 = [0,1,0,3,12]
+var nums2 = [0]
+var nums3 = [0, 0, 1]
+solution.moveZeroes(&nums1)
+solution.moveZeroes(&nums2)
+solution.moveZeroes(&nums3)
+print(nums3)
