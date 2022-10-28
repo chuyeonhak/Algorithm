@@ -399,17 +399,48 @@ class Solution {
 //        nums.removeAll { $0 == 0 }
 //        nums.append(contentsOf: idxArr.map { _ in 0 })
 //    }
-    func moveZeroes(_ nums: inout [Int]) {
-        var writeIdx = 0
-        // Move non-zero items
-        for num in nums where num != 0 {
-            nums[writeIdx] = num
-            writeIdx += 1
+//    func moveZeroes(_ nums: inout [Int]) {
+//        var writeIdx = 0
+//        // Move non-zero items
+//        for num in nums where num != 0 {
+//            nums[writeIdx] = num
+//            writeIdx += 1
+//        }
+//        // Fill the remaining with zero
+//        for i in writeIdx..<nums.count {
+//            nums[i] = 0
+//        }
+//    }
+    
+//167. Two Sum II - Input Array Is Sorted
+//    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+//        
+//        for i in 0..<numbers.count {
+//            for j in i + 1..<numbers.count {
+//                if numbers[i] + numbers[j] == target {
+//                    return [i + 1, j + 1]
+//                }
+//            }
+//        }
+//        
+//        return []
+//    }
+    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+        guard !numbers.isEmpty else { return [] }
+        var i = 0
+        var j = numbers.count - 1
+        
+        while i < j {
+            guard numbers[i] + numbers[j] != target else { break }
+            
+            if numbers[i] + numbers[j] > target {
+                j -= 1
+            } else {
+                i += 1
+            }
         }
-        // Fill the remaining with zero
-        for i in writeIdx..<nums.count {
-            nums[i] = 0
-        }
+        
+        return [i + 1, j + 1]
     }
 }
 
@@ -513,10 +544,14 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 
 //solution.reverseList(listNode1)
 //283. Move Zeroes
-var nums1 = [0,1,0,3,12]
-var nums2 = [0]
-var nums3 = [0, 0, 1]
-solution.moveZeroes(&nums1)
-solution.moveZeroes(&nums2)
-solution.moveZeroes(&nums3)
-print(nums3)
+//var nums1 = [0,1,0,3,12]
+//var nums2 = [0]
+//var nums3 = [0, 0, 1]
+//solution.moveZeroes(&nums1)
+//solution.moveZeroes(&nums2)
+//solution.moveZeroes(&nums3)
+
+//167. Two Sum II - Input Array Is Sorted
+solution.twoSum([2,7,11,15], 9)
+solution.twoSum([2,3,4], 6)
+solution.twoSum([-1,0], -1)
