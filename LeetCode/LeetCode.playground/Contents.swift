@@ -336,27 +336,28 @@ class Solution {
 //        }
 //    }
 //3. Longest Substring Without Repeating Characters
-//    func lengthOfLongestSubstring(_ s: String) -> Int {
-//        if s.count == 0 {
-//            return 0
-//        } else if s.count == 1 {
-//            return 1
-//        }
-//
-//        let arrS = s.map { $0 }
-//        var maxCount = 0
-//
-//        for i in 0..<arrS.count {
-//            for j in (i + 1)..<arrS.count {
-//                if arrS[i] == arrS[j] {
-//                    maxCount = max(j - i, maxCount)
-//                    break
-//                }
-//            }
-//        }
-//
-//        return maxCount
-//    }
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        if s.count == 0 {
+            return 0
+        } else if s.count == 1 {
+            return 1
+        }
+
+        let arrS = Array(s)
+        var temp = [Character]()
+        var maxCount = 0
+        temp.append(arrS[0])
+        
+        for i in 1...arrS.count-1{
+            if let index = temp.firstIndex(of: arrS[i]){
+                temp.removeFirst(index+1)
+            }
+            temp.append(arrS[i])
+            maxCount = max(maxCount, temp.count)
+        }
+        
+        return maxCount
+    }
 
 //49. Group Anagrams
 //    func groupAnagrams(_ strs: [String]) -> [[String]] {
@@ -504,18 +505,18 @@ class Solution {
 //    }
     
 //1346. Check If N and Its Double Exist
-    func checkIfExist(_ arr: [Int]) -> Bool {
-        var set = Set<Int>()
-        
-        for i in arr {
-            if set.contains(i * 2) { return true }
-            if i % 2 == 0 && set.contains(i / 2) {
-                return true
-            }
-            set.insert(i)
-        }
-        return false
-    }
+//    func checkIfExist(_ arr: [Int]) -> Bool {
+//        var set = Set<Int>()
+//
+//        for i in arr {
+//            if set.contains(i * 2) { return true }
+//            if i % 2 == 0 && set.contains(i / 2) {
+//                return true
+//            }
+//            set.insert(i)
+//        }
+//        return false
+//    }
 }
 
 
@@ -598,11 +599,11 @@ let solution = Solution()
 //solution.rotate(&hello2, 3)
 
 //3. Longest Substring Without Repeating Characters
-//solution.lengthOfLongestSubstring("abcabcbb")
-//solution.lengthOfLongestSubstring("bbbbb")
-//solution.lengthOfLongestSubstring("pwwkew")
-//solution.lengthOfLongestSubstring("au")
-//solution.lengthOfLongestSubstring("aab")
+solution.lengthOfLongestSubstring("abcabcbb")
+solution.lengthOfLongestSubstring("bbbbb")
+solution.lengthOfLongestSubstring("pwwkew")
+solution.lengthOfLongestSubstring("au")
+solution.lengthOfLongestSubstring("aab")
 
 //49. Group Anagrams
 //solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
@@ -648,5 +649,5 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.findFinalValue([2,7,9], 4)
 
 //1346. Check If N and Its Double Exist
-solution.checkIfExist([10,2,5,3])
-solution.checkIfExist([3,1,7,11])
+//solution.checkIfExist([10,2,5,3])
+//solution.checkIfExist([3,1,7,11])
