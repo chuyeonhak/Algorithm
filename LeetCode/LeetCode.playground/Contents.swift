@@ -21,6 +21,15 @@ public class TreeNode {
     }
 }
 
+public class Node {
+     public var val: Int
+     public var children: [Node]
+     public init(_ val: Int) {
+         self.val = val
+         self.children = []
+     }
+ }
+
 class Solution {
 //    --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //219. Contains Duplicate II
@@ -564,9 +573,9 @@ class Solution {
 //    }
     
 //557. Reverse Words in a String III
-    func reverseWords(_ s: String) -> String {
-        return s.components(separatedBy: " ").map { String($0.reversed()) }.joined(separator: " ")
-    }
+//    func reverseWords(_ s: String) -> String {
+//        return s.components(separatedBy: " ").map { String($0.reversed()) }.joined(separator: " ")
+//    }
 //    func reverseWords(_ s: String) -> String {
 //        var string = Array(s.utf8)
 //        var i = 0
@@ -596,16 +605,33 @@ class Solution {
 //
 //        return max
 //    }
-    func maxProfit(_ prices: [Int]) -> Int {
-        var minPrice = Int.max
-        var result = 0
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        var minPrice = Int.max
+//        var result = 0
+//
+//        for price in prices {
+//            minPrice = min(minPrice, price)
+//            result = max(result, price - minPrice)
+//        }
+//
+//        return result
+//    }
+    
+//589. N-ary Tree Preorder Traversal
+    func preorder(_ root: Node?) -> [Int] {
+        var res = [Int]()
+        if root == nil { return res }
+        var stack = [Node]()
+        stack.append(root!)
         
-        for price in prices {
-            minPrice = min(minPrice, price)
-            result = max(result, price - minPrice)
+        while stack.count > 0 {
+            var current = stack.removeLast()
+            res.append(current.val)
+            var children = current.children
+            stack += children.reversed()
         }
         
-        return result
+        return res
     }
 }
 
@@ -763,5 +789,18 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.reverseWords("God Ding")
 
 //121. Best Time to Buy and Sell Stock
-solution.maxProfit([7,1,5,3,6,4])
+//solution.maxProfit([7,1,5,3,6,4])
 //solution.maxProfit([7,6,4,3,1])
+
+//589. N-ary Tree Preorder Traversal
+var node1 = Node(1),
+    node2 = Node(2),
+    node3 = Node(3),
+    node4 = Node(4),
+    node5 = Node(5),
+    node6 = Node(6)
+
+node1.children = [node3, node2, node4]
+node3.children = [node5, node6]
+
+solution.preorder(node1)
