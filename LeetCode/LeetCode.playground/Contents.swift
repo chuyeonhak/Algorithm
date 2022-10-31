@@ -618,22 +618,47 @@ class Solution {
 //    }
     
 //589. N-ary Tree Preorder Traversal
-    func preorder(_ root: Node?) -> [Int] {
-        var res = [Int]()
-        if root == nil { return res }
-        var stack = [Node]()
-        stack.append(root!)
-        
-        while stack.count > 0 {
-            var current = stack.removeLast()
-            res.append(current.val)
-            var children = current.children
-            stack += children.reversed()
-        }
-        
-        return res
-    }
-}
+//    func preorder(_ root: Node?) -> [Int] {
+//        var res = [Int]()
+//        if root == nil { return res }
+//        var stack = [Node]()
+//        stack.append(root!)
+//
+//        while stack.count > 0 {
+//            var current = stack.removeLast()
+//            res.append(current.val)
+//            var children = current.children
+//            stack += children.reversed()
+//        }
+//
+//        return res
+//    }
+    
+//102. Binary Tree Level Order Traversal
+    func levelOrder(_ root: TreeNode?) -> [[Int]] {
+            guard root != nil else { return [] }
+            var result: [[Int]] = []
+            
+            var queue: [TreeNode?] = []
+            queue.append(root)
+            
+            while(!queue.isEmpty) {
+                var count = queue.count - 1
+                var temp: [Int] = []
+                 while(count >= 0) {
+                   if let node = queue.removeFirst() {
+                       temp.append(node.val)
+                       count -= 1
+                       if let left = node.left { queue.append(left) }
+                       if let right = node.right { queue.append(right) }
+                   }
+                }
+                
+                result.append(temp)
+            }
+            
+            return result
+        }}
 
 
 let solution = Solution()
@@ -793,14 +818,20 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.maxProfit([7,6,4,3,1])
 
 //589. N-ary Tree Preorder Traversal
-var node1 = Node(1),
-    node2 = Node(2),
-    node3 = Node(3),
-    node4 = Node(4),
-    node5 = Node(5),
-    node6 = Node(6)
+//var node1 = Node(1),
+//    node2 = Node(2),
+//    node3 = Node(3),
+//    node4 = Node(4),
+//    node5 = Node(5),
+//    node6 = Node(6)
+//
+//node1.children = [node3, node2, node4]
+//node3.children = [node5, node6]
+//
+//solution.preorder(node1)
 
-node1.children = [node3, node2, node4]
-node3.children = [node5, node6]
+//102. Binary Tree Level Order Traversal
+solution.levelOrder(nil)
 
-solution.preorder(node1)
+var tempArr = [Int]()
+
