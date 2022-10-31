@@ -532,6 +532,22 @@ class Solution {
 //
 //        return true
 //    }
+    
+//344. Reverse String
+//    func reverseString(_ s: inout [Character]) {
+//        s = Array(s.reversed())
+//    }
+    
+    func reverseString(_ s: inout [Character]) {
+            var first = 0
+            var last = s.count - 1
+            
+            while first < last {
+                (s[first], s[last]) = (s[last], s[first])
+                first += 1
+                last -= 1
+            }
+        }
 }
 
 
@@ -672,3 +688,8 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.isToeplitzMatrix([[1,2],[2,2]])
 //solution.isToeplitzMatrix([[18],[66]])
 //solution.isToeplitzMatrix([[11,74,0,93],[40,11,74,7]])
+
+//344. Reverse String
+var testArr: [Character] = ["h","e","l","l","o"]
+
+solution.reverseString(&testArr)
