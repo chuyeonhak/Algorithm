@@ -538,16 +538,30 @@ class Solution {
 //        s = Array(s.reversed())
 //    }
     
-    func reverseString(_ s: inout [Character]) {
-            var first = 0
-            var last = s.count - 1
+//    func reverseString(_ s: inout [Character]) {
+//        var first = 0
+//        var last = s.count - 1
+//
+//        while first < last {
+//            (s[first], s[last]) = (s[last], s[first])
+//            first += 1
+//            last -= 1
+//        }
+//    }
+
+//876. Middle of the Linked List
+    func middleNode(_ head: ListNode?) -> ListNode? {
+        var slow: ListNode? = head
+        var fast: ListNode? = head
+        
+        while fast?.next != nil{
             
-            while first < last {
-                (s[first], s[last]) = (s[last], s[first])
-                first += 1
-                last -= 1
-            }
+            slow = slow?.next
+            fast = fast?.next?.next
         }
+        
+        return slow
+    }
 }
 
 
@@ -690,6 +704,11 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.isToeplitzMatrix([[11,74,0,93],[40,11,74,7]])
 
 //344. Reverse String
-var testArr: [Character] = ["h","e","l","l","o"]
+//var testArr: [Character] = ["h","e","l","l","o"]
+//solution.reverseString(&testArr)
 
-solution.reverseString(&testArr)
+//876. Middle of the Linked List
+let listNode2 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))),
+    listNode3 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6))))))
+solution.middleNode(listNode2)
+solution.middleNode(listNode3)
