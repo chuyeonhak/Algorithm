@@ -524,7 +524,7 @@ import UIKit
 //    var copyA = min(a, b),
 //        copyB = max(a, b),
 //        copyN = n
-//    
+//
 //    while true {
 //        if (abs(copyA - copyB) <= 1) && (min(copyA, copyB) % 2 == 1) { break }
 //        if (copyA == 1 || copyB == 1) && (copyB == 1 || copyB == 2) { break }
@@ -532,13 +532,13 @@ import UIKit
 //            count -= 1
 //            break
 //        }
-//        
+//
 //        copyN = copyN >> 1
 //        count += 1
 //        copyA /= 2
 //        copyB /= 2
 //    }
-//    
+//
 //    return count
 //}
 //

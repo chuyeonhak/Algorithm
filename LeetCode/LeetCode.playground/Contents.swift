@@ -336,28 +336,28 @@ class Solution {
 //        }
 //    }
 //3. Longest Substring Without Repeating Characters
-    func lengthOfLongestSubstring(_ s: String) -> Int {
-        if s.count == 0 {
-            return 0
-        } else if s.count == 1 {
-            return 1
-        }
-
-        let arrS = Array(s)
-        var temp = [Character]()
-        var maxCount = 0
-        temp.append(arrS[0])
-        
-        for i in 1...arrS.count-1{
-            if let index = temp.firstIndex(of: arrS[i]){
-                temp.removeFirst(index+1)
-            }
-            temp.append(arrS[i])
-            maxCount = max(maxCount, temp.count)
-        }
-        
-        return maxCount
-    }
+//    func lengthOfLongestSubstring(_ s: String) -> Int {
+//        if s.count == 0 {
+//            return 0
+//        } else if s.count == 1 {
+//            return 1
+//        }
+//
+//        let arrS = Array(s)
+//        var temp = [Character]()
+//        var maxCount = 0
+//        temp.append(arrS[0])
+//
+//        for i in 1...arrS.count-1{
+//            if let index = temp.firstIndex(of: arrS[i]){
+//                temp.removeFirst(index+1)
+//            }
+//            temp.append(arrS[i])
+//            maxCount = max(maxCount, temp.count)
+//        }
+//
+//        return maxCount
+//    }
 
 //49. Group Anagrams
 //    func groupAnagrams(_ strs: [String]) -> [[String]] {
@@ -517,6 +517,21 @@ class Solution {
 //        }
 //        return false
 //    }
+//766. Toeplitz Matrix
+//    func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
+//        let col =  matrix[0].count - 1,
+//            row = matrix.count - 1
+//
+//        for c in 0..<col {
+//            for r in 0..<row {
+//                if matrix[r][c] != matrix[r+1][c+1] {
+//                    return false
+//                }
+//            }
+//        }
+//
+//        return true
+//    }
 }
 
 
@@ -599,11 +614,11 @@ let solution = Solution()
 //solution.rotate(&hello2, 3)
 
 //3. Longest Substring Without Repeating Characters
-solution.lengthOfLongestSubstring("abcabcbb")
-solution.lengthOfLongestSubstring("bbbbb")
-solution.lengthOfLongestSubstring("pwwkew")
-solution.lengthOfLongestSubstring("au")
-solution.lengthOfLongestSubstring("aab")
+//solution.lengthOfLongestSubstring("abcabcbb")
+//solution.lengthOfLongestSubstring("bbbbb")
+//solution.lengthOfLongestSubstring("pwwkew")
+//solution.lengthOfLongestSubstring("au")
+//solution.lengthOfLongestSubstring("aab")
 
 //49. Group Anagrams
 //solution.groupAnagrams(["eat","tea","tan","ate","nat","bat"])
@@ -651,3 +666,9 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //1346. Check If N and Its Double Exist
 //solution.checkIfExist([10,2,5,3])
 //solution.checkIfExist([3,1,7,11])
+
+//766. Toeplitz Matrix
+//solution.isToeplitzMatrix([[1,2,3,4],[5,1,2,3],[9,5,1,2]])
+//solution.isToeplitzMatrix([[1,2],[2,2]])
+//solution.isToeplitzMatrix([[18],[66]])
+//solution.isToeplitzMatrix([[11,74,0,93],[40,11,74,7]])
