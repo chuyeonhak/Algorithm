@@ -550,17 +550,62 @@ class Solution {
 //    }
 
 //876. Middle of the Linked List
-    func middleNode(_ head: ListNode?) -> ListNode? {
-        var slow: ListNode? = head
-        var fast: ListNode? = head
+//    func middleNode(_ head: ListNode?) -> ListNode? {
+//        var slow: ListNode? = head
+//        var fast: ListNode? = head
+//
+//        while fast?.next != nil{
+//
+//            slow = slow?.next
+//            fast = fast?.next?.next
+//        }
+//
+//        return slow
+//    }
+    
+//557. Reverse Words in a String III
+    func reverseWords(_ s: String) -> String {
+        return s.components(separatedBy: " ").map { String($0.reversed()) }.joined(separator: " ")
+    }
+//    func reverseWords(_ s: String) -> String {
+//        var string = Array(s.utf8)
+//        var i = 0
+//
+//        for j in string.indices {
+//            if string[j] == UInt8(ascii: " ") {
+//                string[i ..< j].reverse()
+//                i = j + 1
+//            }
+//        }
+//        string[i...].reverse()
+//
+//        return String(decoding: string, as: Unicode.UTF8.self)
+//    }
+    
+//121. Best Time to Buy and Sell Stock
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        var max = 0
+//
+//        for i in 0..<prices.count {
+//            for j in i+1..<prices.count {
+//                if prices[j] - prices[i] > 0 && prices[j] - prices[i] > max {
+//                    max = prices[j] - prices[i]
+//                }
+//            }
+//        }
+//
+//        return max
+//    }
+    func maxProfit(_ prices: [Int]) -> Int {
+        var minPrice = Int.max
+        var result = 0
         
-        while fast?.next != nil{
-            
-            slow = slow?.next
-            fast = fast?.next?.next
+        for price in prices {
+            minPrice = min(minPrice, price)
+            result = max(result, price - minPrice)
         }
         
-        return slow
+        return result
     }
 }
 
@@ -708,7 +753,15 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.reverseString(&testArr)
 
 //876. Middle of the Linked List
-let listNode2 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))),
-    listNode3 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6))))))
-solution.middleNode(listNode2)
-solution.middleNode(listNode3)
+//let listNode2 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))),
+//    listNode3 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, ListNode(6))))))
+//solution.middleNode(listNode2)
+//solution.middleNode(listNode3)
+
+//557. Reverse Words in a String III
+//solution.reverseWords("Let's take LeetCode contest")
+//solution.reverseWords("God Ding")
+
+//121. Best Time to Buy and Sell Stock
+solution.maxProfit([7,1,5,3,6,4])
+//solution.maxProfit([7,6,4,3,1])
