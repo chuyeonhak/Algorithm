@@ -661,30 +661,47 @@ class Solution {
 //        }
     
 //567. Permutation in String
-    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
-        typealias DCI = [Character:Int]
-        let as2 = Array(s2)
-        var lhs = 0, rhs = 0, match = 0, need = DCI(), win = DCI()
-        for ch in s1 { need[ch, default: 0] += 1 }
-        while rhs < as2.count {
-            let a2r = as2[rhs]
-            rhs += 1
-            if let n2r = need[a2r] {
-                win[a2r, default: 0] += 1
-                if win[a2r] == n2r { match += 1 }
-            }
-            while match == need.count {
-                if rhs - lhs == s1.count { return true }
-                let a2l = as2[lhs]
-                lhs += 1
-                if let n2l = need[a2l] {
-                    if win[a2l] == n2l { match -= 1 }
-                    win[a2l, default: 0] -= 1
-                }
+//    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+//        typealias DCI = [Character:Int]
+//        let as2 = Array(s2)
+//        var lhs = 0, rhs = 0, match = 0, need = DCI(), win = DCI()
+//        for ch in s1 { need[ch, default: 0] += 1 }
+//        while rhs < as2.count {
+//            let a2r = as2[rhs]
+//            rhs += 1
+//            if let n2r = need[a2r] {
+//                win[a2r, default: 0] += 1
+//                if win[a2r] == n2r { match += 1 }
+//            }
+//            while match == need.count {
+//                if rhs - lhs == s1.count { return true }
+//                let a2l = as2[lhs]
+//                lhs += 1
+//                if let n2l = need[a2l] {
+//                    if win[a2l] == n2l { match -= 1 }
+//                    win[a2l, default: 0] -= 1
+//                }
+//            }
+//        }
+//        return false
+//    }
+    
+//733. Flood Fill
+    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+            var img = image
+            dfs(&img, sr, sc, img[sr][sc], newColor)
+            return img
+        }
+        private func dfs(_ image: inout [[Int]], _ sr: Int, _ sc: Int, _ pix: Int, _ newColor: Int) {
+            if (sr < 0 || sr >= image.count) { return }
+            if (sc < 0 || sc >= image[0].count) { return }
+            let pixOld = image[sr][sc]
+            if pixOld == newColor || pixOld != pix { return }
+            image[sr][sc] = newColor
+            for p in [(0,1),(0,-1),(1,0),(-1,0)] {
+                dfs(&image, (sr + p.0), (sc + p.1), pix, newColor)
             }
         }
-        return false
-    }
 }
 
 
@@ -861,5 +878,9 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.levelOrder(nil)
 
 //567. Permutation in String
-solution.checkInclusion("ab", "eidbaooo")
-solution.checkInclusion("ab", "eidboaoo")
+//solution.checkInclusion("ab", "eidbaooo")
+//solution.checkInclusion("ab", "eidboaoo")
+
+//733. Flood Fill
+solution.floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)
+solution.floodFill([[0,0,0],[0,0,0]], 0, 0, 0)
