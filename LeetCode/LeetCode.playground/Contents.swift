@@ -687,21 +687,36 @@ class Solution {
 //    }
     
 //733. Flood Fill
-    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
-            var img = image
-            dfs(&img, sr, sc, img[sr][sc], newColor)
-            return img
+//    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+//        var img = image
+//        dfs(&img, sr, sc, img[sr][sc], newColor)
+//        return img
+//    }
+//    private func dfs(_ image: inout [[Int]], _ sr: Int, _ sc: Int, _ pix: Int, _ newColor: Int) {
+//        if (sr < 0 || sr >= image.count) { return }
+//        if (sc < 0 || sc >= image[0].count) { return }
+//        let pixOld = image[sr][sc]
+//        if pixOld == newColor || pixOld != pix { return }
+//        image[sr][sc] = newColor
+//        for p in [(0,1),(0,-1),(1,0),(-1,0)] {
+//            dfs(&image, (sr + p.0), (sc + p.1), pix, newColor)
+//        }
+//    }
+    
+//231. Power of Two
+    func isPowerOfTwo(_ n: Int) -> Bool {
+        guard n != 0 && n % 2 == 0 else { return false }
+        guard n != 1 else { return true }
+        var copyN = n
+        
+        
+        while copyN != 1 {
+            if copyN % 2 != 0 { return false }
+            copyN = copyN >> 1
         }
-        private func dfs(_ image: inout [[Int]], _ sr: Int, _ sc: Int, _ pix: Int, _ newColor: Int) {
-            if (sr < 0 || sr >= image.count) { return }
-            if (sc < 0 || sc >= image[0].count) { return }
-            let pixOld = image[sr][sc]
-            if pixOld == newColor || pixOld != pix { return }
-            image[sr][sc] = newColor
-            for p in [(0,1),(0,-1),(1,0),(-1,0)] {
-                dfs(&image, (sr + p.0), (sc + p.1), pix, newColor)
-            }
-        }
+        
+        return true
+    }
 }
 
 
@@ -882,5 +897,12 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.checkInclusion("ab", "eidboaoo")
 
 //733. Flood Fill
-solution.floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)
-solution.floodFill([[0,0,0],[0,0,0]], 0, 0, 0)
+//solution.floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2)
+//solution.floodFill([[0,0,0],[0,0,0]], 0, 0, 0)
+
+//231. Power of Two
+solution.isPowerOfTwo(1)
+solution.isPowerOfTwo(16)
+solution.isPowerOfTwo(18)
+solution.isPowerOfTwo(0)
+solution.isPowerOfTwo(1)
