@@ -722,6 +722,17 @@ class Solution {
 //    func hammingWeight(_ n: Int) -> Int {
 //        return n.nonzeroBitCount
 //    }
+    
+//338. Counting Bits
+    func countBits(_ n: Int) -> [Int] {
+        guard n != 0 else { return [0] }
+        var result = [Int]()
+        
+        for i in 0...n {
+            result.append(i.nonzeroBitCount)
+        }
+        return result
+    }
 }
 
 
@@ -914,3 +925,7 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 
 //191. Number of 1 Bits
 //solution.hammingWeight(00000000000000000000000000001011)
+
+//338. Counting Bits
+solution.countBits(2)
+solution.countBits(5)
