@@ -704,19 +704,24 @@ class Solution {
 //    }
     
 //231. Power of Two
-    func isPowerOfTwo(_ n: Int) -> Bool {
-        guard n != 0 && n % 2 == 0 else { return false }
-        guard n != 1 else { return true }
-        var copyN = n
-        
-        
-        while copyN != 1 {
-            if copyN % 2 != 0 { return false }
-            copyN = copyN >> 1
-        }
-        
-        return true
-    }
+//    func isPowerOfTwo(_ n: Int) -> Bool {
+//        guard n != 0 && n % 2 == 0 else { return false }
+//        guard n != 1 else { return true }
+//        var copyN = n
+//
+//
+//        while copyN != 1 {
+//            if copyN % 2 != 0 { return false }
+//            copyN = copyN >> 1
+//        }
+//
+//        return true
+//    }
+    
+//191. Number of 1 Bits
+//    func hammingWeight(_ n: Int) -> Int {
+//        return n.nonzeroBitCount
+//    }
 }
 
 
@@ -901,8 +906,11 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.floodFill([[0,0,0],[0,0,0]], 0, 0, 0)
 
 //231. Power of Two
-solution.isPowerOfTwo(1)
-solution.isPowerOfTwo(16)
-solution.isPowerOfTwo(18)
-solution.isPowerOfTwo(0)
-solution.isPowerOfTwo(1)
+//solution.isPowerOfTwo(1)
+//solution.isPowerOfTwo(16)
+//solution.isPowerOfTwo(18)
+//solution.isPowerOfTwo(0)
+//solution.isPowerOfTwo(1)
+
+//191. Number of 1 Bits
+//solution.hammingWeight(00000000000000000000000000001011)
