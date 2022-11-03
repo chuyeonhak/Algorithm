@@ -733,6 +733,23 @@ class Solution {
         }
         return result
     }
+    
+//1342. Number of Steps to Reduce a Number to Zero
+    func numberOfSteps(_ num: Int) -> Int {
+        var copy = num
+        var count = 0
+        
+        while copy != 0 {
+            if copy % 2 == 0 {
+                copy = copy >> 2
+            } else {
+                copy -= 1
+            }
+            count += 1
+        }
+        
+        return count
+    }
 }
 
 
@@ -927,5 +944,8 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.hammingWeight(00000000000000000000000000001011)
 
 //338. Counting Bits
-solution.countBits(2)
-solution.countBits(5)
+//solution.countBits(2)
+//solution.countBits(5)
+
+//1342. Number of Steps to Reduce a Number to Zero
+solution.numberOfSteps(14)
