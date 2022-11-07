@@ -724,31 +724,52 @@ class Solution {
 //    }
     
 //338. Counting Bits
-    func countBits(_ n: Int) -> [Int] {
-        guard n != 0 else { return [0] }
-        var result = [Int]()
-        
-        for i in 0...n {
-            result.append(i.nonzeroBitCount)
-        }
-        return result
-    }
+//    func countBits(_ n: Int) -> [Int] {
+//        guard n != 0 else { return [0] }
+//        var result = [Int]()
+//
+//        for i in 0...n {
+//            result.append(i.nonzeroBitCount)
+//        }
+//        return result
+//    }
     
 //1342. Number of Steps to Reduce a Number to Zero
-    func numberOfSteps(_ num: Int) -> Int {
-        var copy = num
-        var count = 0
+//    func numberOfSteps(_ num: Int) -> Int {
+//        var copy = num
+//        var count = 0
+//
+//        while copy != 0 {
+//            if copy % 2 == 0 {
+//                copy = copy / 2
+//            } else {
+//                copy -= 1
+//            }
+//            count += 1
+//        }
+//
+//        return count
+//    }
+    
+//1323. Maximum 69 Number
+    func maximum69Number (_ num: Int) -> Int {
+        var maxNum = num
+        let strNum = String(num).map { $0 }
         
-        while copy != 0 {
-            if copy % 2 == 0 {
-                copy = copy >> 2
-            } else {
-                copy -= 1
+        for i in 0..<strNum.count {
+            var copyStr = strNum
+            
+            switch strNum[i] {
+            case "6":
+                copyStr[i] = "9"
+            case "9":
+                copyStr[i] = "6"
+            default: break
             }
-            count += 1
+            
+            maxNum = max(maxNum, Int(String(copyStr))!)
         }
-        
-        return count
+        return maxNum
     }
 }
 
@@ -948,4 +969,16 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.countBits(5)
 
 //1342. Number of Steps to Reduce a Number to Zero
-solution.numberOfSteps(14)
+//solution.numberOfSteps(14)
+
+//1404. Number of Steps to Reduce a Number in Binary Representation to One
+//solution.numSteps("1101")
+//solution.numSteps("10")
+//solution.numSteps("1")
+//solution.numSteps("1111110011101010110011100100101110010100101110111010111110110010")
+
+//1323. Maximum 69 Number
+solution.maximum69Number(9669)
+solution.maximum69Number(9996)
+solution.maximum69Number(9999)
+
