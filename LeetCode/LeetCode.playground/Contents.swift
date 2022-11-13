@@ -752,24 +752,32 @@ class Solution {
 //    }
     
 //1323. Maximum 69 Number
-    func maximum69Number (_ num: Int) -> Int {
-        var maxNum = num
-        let strNum = String(num).map { $0 }
-        
-        for i in 0..<strNum.count {
-            var copyStr = strNum
-            
-            switch strNum[i] {
-            case "6":
-                copyStr[i] = "9"
-            case "9":
-                copyStr[i] = "6"
-            default: break
-            }
-            
-            maxNum = max(maxNum, Int(String(copyStr))!)
-        }
-        return maxNum
+//    func maximum69Number (_ num: Int) -> Int {
+//        var maxNum = num
+//        let strNum = String(num).map { $0 }
+//
+//        for i in 0..<strNum.count {
+//            var copyStr = strNum
+//
+//            switch strNum[i] {
+//            case "6":
+//                copyStr[i] = "9"
+//            case "9":
+//                copyStr[i] = "6"
+//            default: break
+//            }
+//
+//            maxNum = max(maxNum, Int(String(copyStr))!)
+//        }
+//        return maxNum
+//    }
+//151. Reverse Words in a String
+    func reverseWords(_ s: String) -> String {
+        return s
+            .components(separatedBy: " ")
+            .filter { $0 != "" }
+            .reversed()
+            .joined(separator: " ")
     }
 }
 
@@ -978,7 +986,9 @@ let listNode1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
 //solution.numSteps("1111110011101010110011100100101110010100101110111010111110110010")
 
 //1323. Maximum 69 Number
-solution.maximum69Number(9669)
-solution.maximum69Number(9996)
-solution.maximum69Number(9999)
+//solution.maximum69Number(9669)
+//solution.maximum69Number(9996)
+//solution.maximum69Number(9999)
 
+//151. Reverse Words in a String
+solution.reverseWords("  hello world  ")
