@@ -772,12 +772,16 @@ class Solution {
 //        return maxNum
 //    }
 //151. Reverse Words in a String
+//    func reverseWords(_ s: String) -> String {
+//        return s
+//            .components(separatedBy: " ")
+//            .filter { $0 != "" }
+//            .reversed()
+//            .joined(separator: " ")
+//    }
+    
     func reverseWords(_ s: String) -> String {
-        return s
-            .components(separatedBy: " ")
-            .filter { $0 != "" }
-            .reversed()
-            .joined(separator: " ")
+        s.split(separator: " ").reversed().joined(separator: " ")
     }
 }
 
